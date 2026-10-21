@@ -3,45 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>El Durazno alojamiento y reservas</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav>
-        <a href="#inicio">Inicio</a>
-        <a href="#galeria">Galería</a>
-        <a href="#contacto">Contacto</a>
-        <a href="#alojamiento">Alojamiento</a>
-        <a href="#ubicacion">Ubicacion</a>
-        <a href="#preguntas-frecuentes">Preguntas Frecuentes</a>
-    </nav>
-    <section id="inicio">
-        <h1>Bienvenidos</h1>
-    </section>
-    <section id="galeria">
-        <h2>Galeria</h2>
-    </section>
-    <section id="contacto">
-        <h2>Contacto</h2>
-        <form>
-        <label for="nombre">Nombre</label>
-        <input type="text" id="nombre" name="nombre" autocomplete="name" required>
-        <label for="correo">Correo</label>
-        <input type="email" id="correo" name="email" autocomplete="email" required>
-        <label for="telefono">Telefono</label>
-        <input type="tel" id="telefono" name="tel" autocomplete="tel">
-        <label for="mensaje">Mensaje</label>
-        <textarea id="mensaje" name="mensaje" required></textarea>
-        <button type="submit">Enviar consulta</button>
-    </form>
-    </section>
-    <section id="alojamiento">
-        <h2>Alojamiento</h2>
-    </section>
-    <section id="ubicacion"><H2>Ubicacion</H2>
-    </section>
-    <section id="preguntas-frecuentes">
-    <H2>Preguntas Frecuentes</H2>
-    </section>
+    <header>
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#galeria">Galería</a>
+            <a href="#contacto">Contacto</a>
+            <a href="#alojamiento">Alojamiento</a>
+            <a href="#ubicacion">Ubicación</a>
+            <a href="#preguntas-frecuentes">Preguntas Frecuentes</a>
+        </nav>
+    </header>
+    <main>
+        <section id="inicio">
+            <h1>Bienvenidos</h1>
+            <p>Explora nuestras secciones para obtener más información sobre nuestros servicios y ofertas.</p>
+            <a href="#alojamiento">Ver alojamiento</a>
+        </section>
+        <section id="galeria">
+            <h2>Galería</h2>
+            <img src="imagenes/frente 1.jpeg" alt="Imagen 1">
+        </section>
+        <section id="contacto">
+            <h2>Contacto</h2>
+            <form>
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" autocomplete="name" required>
+                <label for="correo">Correo</label>
+                <input type="email" id="correo" name="email" autocomplete="email" required>
+                <label for="telefono">Teléfono</label>
+                <input type="tel" id="telefono" name="tel" autocomplete="tel">
+                <label for="mensaje">Mensaje</label>
+                <textarea id="mensaje" name="mensaje" required></textarea>
+                <button type="submit">Enviar consulta</button>
+            </form>
+        </section>
+        <section id="alojamiento">
+            <h2>Alojamiento</h2>
+            <p>El Durazno es una cabaña amplia, acogedora y confortable, con abundante luz natural y un entorno rodeado de montañas. Cuenta con cocina, living comedor, un dormitorio matrimonial y un segundo dormitorio con camas individuales. Dispone de un baño con ducha y bidet. Tiene capacidad para cinco personas.</p>
+        </section>
+        <section id="ubicacion">
+            <h2>Ubicación</h2>
+            <p>Entre paisajes de montaña e historia minera, Andacollo invita a conocer el norte neuquino. En la zona se pueden realizar caminatas, cabalgatas y recorridos fotográficos, además de visitar localidades cercanas como Huinganco, conocido como “el jardín de la provincia”.</p>
+            <iframe
+                title="Ubicación de El Durazno en Google Maps"
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d397.3224542719731!2d-70.6694046!3d-37.1864598!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x966de5a447266231%3A0x2def07f9f90d883f!2sAlojamiento%20el%20Durazno!5e0!3m2!1ses-419!2sar!4v1792597183284!5m2!1ses-419!2sar"
+                width="600"
+                height="450"
+                style="border:0;"
+                allowfullscreen
+                loading="lazy"
+                referrerpolicy="strict-origin-when-cross-origin">
+</iframe>
+        </section>
+        <section id="preguntas-frecuentes">
+            <h2>Preguntas Frecuentes</h2>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 El Durazno Alojamiento. Todos los derechos reservados.</p>
+    </footer>
+
 </body>
 </html>
