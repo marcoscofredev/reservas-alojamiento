@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>El Durazno alojamiento y reservas</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
     <header>
         <nav>
             <a href="#inicio">Inicio</a>
+            <a href="#disponibilidad">Disponibilidad</a>
             <a href="#galeria">Galería</a>
             <a href="#contacto">Contacto</a>
             <a href="#alojamiento">Alojamiento</a>
@@ -23,6 +25,19 @@
             <p>Explora nuestras secciones para obtener más información sobre nuestros servicios y ofertas.</p>
             <a href="#alojamiento">Ver alojamiento</a>
             <img src="imagenes/frente 1.jpeg" alt="Vista del frente de la cabaña El Durazno">
+        </section>
+        <section id="disponibilidad">
+            <h2>Disponibilidad</h2>
+            <p>Consulta la disponibilidad de nuestra cabaña para tus fechas de estancia.</p>
+            <form id="form-disponibilidad">
+            <label for="entrada">Fecha de entrada</label>
+            <input type="date" id="entrada" name="entrada" required>
+            <label for="salida">Fecha de salida</label>
+            <input type="date" id="salida" name="salida" required>
+            <button type="submit">Consultar disponibilidad</button>
+    </form>
+
+    <p id="resultado-disponibilidad" role="status"></p>
         </section>
         <section id="galeria">
             <h2>Galería</h2>
