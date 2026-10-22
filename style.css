@@ -44,7 +44,7 @@ label { font-size: .9rem; font-weight: 600; margin: 0 0 6px; }
 input, textarea { width: 100%; min-width: 0; border: 1px solid #a5b4a7; background: #fff; padding: 12px 14px; border-radius: 3px; color: var(--ink); font: inherit; margin-bottom: 20px; }
 textarea { min-height: 150px; resize: vertical; }
 button { align-self: flex-start; }
-#alojamiento { padding: 64px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); display: grid; grid-template-columns: .8fr 1.2fr; gap: 48px; }
+#alojamiento { padding: 64px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; align-items: center; }
 #alojamiento h2::before { content: 'TU LUGAR PARA DESCANSAR'; }
 #alojamiento p { margin: 0; font-size: 1.1rem; }
 #ubicacion { display: grid; grid-template-columns: 1fr 1fr; gap: 0 56px; }
@@ -83,3 +83,9 @@ footer p { margin: auto; color: #eef3eb; font-size: .85rem; }
     iframe { height: 320px; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+.servicios {
+    width: 100%;
+    max-width: 360px;
+    height: auto;
+    margin: 0 auto;
+}
