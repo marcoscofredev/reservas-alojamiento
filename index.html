@@ -5,11 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>El Durazno alojamiento y reservas</title>
     <link rel="stylesheet" href="style.css">
+    <script src="availability.js" defer></script>
     <script src="script.js" defer></script>
 </head>
 <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
     <header>
-        <nav>
+        <nav aria-label="Navegación principal">
+            <a class="brand" href="#inicio">El Durazno<span>Alojamiento · Andacollo</span></a>
+            <div class="nav-links">
             <a href="#inicio">Inicio</a>
             <a href="#disponibilidad">Disponibilidad</a>
             <a href="#galeria">Galería</a>
@@ -17,35 +21,70 @@
             <a href="#alojamiento">Alojamiento</a>
             <a href="#ubicacion">Ubicación</a>
             <a href="#preguntas-frecuentes">Preguntas Frecuentes</a>
+            </div>
         </nav>
     </header>
-    <main>
+    <main id="contenido">
         <section id="inicio">
             <h1>Bienvenidos</h1>
-            <p>Explora nuestras secciones para obtener más información sobre nuestros servicios y ofertas.</p>
+            <p>Una cabaña luminosa, atención familiar y el norte neuquino por descubrir. Tu lugar para volver y descansar en Andacollo.</p>
             <a href="#alojamiento">Ver alojamiento</a>
             <img src="imagenes/frente 1.jpeg" alt="Vista del frente de la cabaña El Durazno">
         </section>
-        <section id="disponibilidad">
-            <h2>Disponibilidad</h2>
-            <p>Consulta la disponibilidad de nuestra cabaña para tus fechas de estancia.</p>
-            <form id="form-disponibilidad">
-            <label for="entrada">Fecha de entrada</label>
-            <input type="date" id="entrada" name="entrada" required>
-            <label for="salida">Fecha de salida</label>
-            <input type="date" id="salida" name="salida" required>
-            <button type="submit">Consultar disponibilidad</button>
-    </form>
-
-    <p id="resultado-disponibilidad" role="status"></p>
+        <section id="disponibilidad" class="section-layout" aria-labelledby="titulo-disponibilidad">
+            <div class="section-copy">
+                <p class="eyebrow">Elegí tu próxima escapada</p>
+                <h2 id="titulo-disponibilidad">Disponibilidad</h2>
+                <p>Elegí una fecha de entrada y otra de salida. Podés llegar el mismo día en que termina otra estadía.</p>
+                <p class="demo-note"><strong>Calendario de prueba.</strong> Las fechas ocupadas son ejemplos. La consulta no confirma una reserva real.</p>
+            </div>
+            <div class="booking-panel">
+                <div class="calendar" id="calendario" hidden>
+                    <div class="calendar-toolbar">
+                        <button type="button" class="calendar-nav" id="mes-anterior" aria-label="Mes anterior">‹</button>
+                        <h3 id="mes-calendario" aria-live="polite" aria-atomic="true"></h3>
+                        <button type="button" class="calendar-nav" id="mes-siguiente" aria-label="Mes siguiente">›</button>
+                    </div>
+                    <p id="ayuda-calendario" class="calendar-help">Elegí tu fecha de entrada.</p>
+                    <table class="calendar-table" aria-labelledby="mes-calendario" aria-describedby="ayuda-calendario">
+                        <thead><tr>
+                            <th scope="col"><abbr title="Lunes">Lu</abbr></th>
+                            <th scope="col"><abbr title="Martes">Ma</abbr></th>
+                            <th scope="col"><abbr title="Miércoles">Mi</abbr></th>
+                            <th scope="col"><abbr title="Jueves">Ju</abbr></th>
+                            <th scope="col"><abbr title="Viernes">Vi</abbr></th>
+                            <th scope="col"><abbr title="Sábado">Sá</abbr></th>
+                            <th scope="col"><abbr title="Domingo">Do</abbr></th>
+                        </tr></thead>
+                        <tbody id="dias-calendario"></tbody>
+                    </table>
+                    <ul class="calendar-legend" aria-label="Referencias del calendario">
+                        <li><span class="legend-dot available"></span>Disponible</li>
+                        <li><span class="legend-dot occupied"></span>Noche ocupada</li>
+                        <li><span class="legend-dot selected"></span>Tu selección</li>
+                    </ul>
+                    <button class="text-button" type="button" id="limpiar-fechas">Borrar fechas</button>
+                </div>
+                <p id="resultado-disponibilidad" class="booking-result" role="status" aria-live="polite" aria-atomic="true"></p>
+                <noscript>Para consultar fechas, activá JavaScript en tu navegador. El calendario es una demostración.</noscript>
+            </div>
         </section>
-        <section id="galeria">
-            <h2>Galería</h2>
-            <img src="imagenes/frente 1.jpeg" alt="Imagen 1">
+        <section id="galeria" class="section-layout">
+            <div class="section-copy">
+                <p class="eyebrow">Una mirada al lugar</p>
+                <h2>Galería</h2>
+                <p>Conocé El Durazno antes de tu llegada.</p>
+            </div>
+            <img src="imagenes/frente 1.jpeg" alt="Frente de la cabaña El Durazno" loading="lazy">
         </section>
-        <section id="contacto">
-            <h2>Contacto</h2>
-            <form>
+        <section id="contacto" class="section-layout">
+            <div class="section-copy">
+                <p class="eyebrow">Estamos para ayudarte</p>
+                <h2>Contacto</h2>
+                <p>Contanos qué tenés en mente para tu estadía.</p>
+                <p class="small-note" id="nota-contacto">El envío de consultas todavía no está habilitado.</p>
+            </div>
+            <form class="contact-form" id="form-contacto" aria-describedby="nota-contacto">
                 <label for="nombre">Nombre</label>
                 <input type="text" id="nombre" name="nombre" autocomplete="name" required>
                 <label for="correo">Correo</label>
@@ -54,20 +93,25 @@
                 <input type="tel" id="telefono" name="tel" autocomplete="tel">
                 <label for="mensaje">Mensaje</label>
                 <textarea id="mensaje" name="mensaje" required></textarea>
-                <button type="submit">Enviar consulta</button>
+                <button type="submit" disabled>Envío próximamente</button>
             </form>
         </section>
-        <section id="alojamiento">
+        <section id="alojamiento" class="section-layout">
             <div class="alojamiento-texto">
+                <p class="eyebrow">Tu lugar para descansar</p>
                 <h2>Alojamiento</h2>
                 <p>El Durazno es una cabaña amplia, acogedora y confortable, con abundante luz natural y un entorno rodeado de montañas. Cuenta con cocina, living comedor, un dormitorio matrimonial y un segundo dormitorio con camas individuales. Dispone de un baño con ducha y bidet. Tiene capacidad para cinco personas.</p>
             </div>
             <img class="servicios" src="imagenes/servicios-pictogramas.png" alt="Un baño con ducha, wifi, capacidad para cinco personas, estacionamiento y parrilla">
         </section>
-        <section id="ubicacion">
+        <section id="ubicacion" class="section-layout">
+            <div class="section-copy">
+            <p class="eyebrow">Norte neuquino</p>
             <h2>Ubicación</h2>
             <p>El Durazno está ubicado frente a la ruta 43, en Andacollo, en el norte de la provincia de Neuquén.</p>
             <p>Entre paisajes de montaña e historia minera, Andacollo invita a conocer el norte neuquino. En la zona se pueden realizar caminatas, cabalgatas y recorridos fotográficos, además de visitar localidades cercanas como Huinganco, conocido como “el jardín de la provincia”.</p>
+            <a href="https://maps.app.goo.gl/PDuxqRsizB2UTvRb9">Cómo llegar en Google Maps ↗</a>
+            </div>
             <iframe
                 title="Ubicación de El Durazno en Google Maps"
                 src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d397.3224542719731!2d-70.6694046!3d-37.1864598!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x966de5a447266231%3A0x2def07f9f90d883f!2sAlojamiento%20el%20Durazno!5e0!3m2!1ses-419!2sar!4v1792597183284!5m2!1ses-419!2sar"
@@ -79,8 +123,13 @@
                 referrerpolicy="strict-origin-when-cross-origin">
             </iframe>
         </section>
-        <section id="preguntas-frecuentes">
-            <h2>Preguntas Frecuentes</h2>
+        <section id="preguntas-frecuentes" class="section-layout">
+            <div class="section-copy">
+                <p class="eyebrow">Antes de viajar</p>
+                <h2>Preguntas frecuentes</h2>
+                <p>Lo que necesitás saber para organizar tu visita.</p>
+            </div>
+            <div class="faq-content">
             <h3>¿Con qué está equipada la cabaña?</h3>
             <p>La cabaña cuenta con calefacción y conexión wifi para acompañar tu estadía. La cocina dispone de microondas, cocina, utensilios y vajilla para preparar y disfrutar tus comidas. También incluimos ropa de cama, toallas y toallones. Actualmente, la cabaña no cuenta con televisión.</p>
             <h3>¿Para cuántas personas tiene capacidad la cabaña?</h3>
@@ -102,10 +151,11 @@
             <p>Para reservar, primero consultá la disponibilidad para las fechas de tu viaje. Se solicita una seña del 50 % del total de la estadía. Para reservas de mayor importe, las condiciones de la seña se coordinan directamente con el alojamiento antes de realizar el pago.</p>
             <h3>¿Qué medios de pago se aceptan?</h3>
             <p>Aceptamos transferencias a nuestras cuentas de Mercado Pago y Naranja. Los datos de la cuenta se facilitan de forma privada al coordinar la reserva.</p>
+            </div>
         </section>
     </main>
     <footer>
-        <p>&copy; 2024 El Durazno Alojamiento. Todos los derechos reservados.</p>
+        <p>El Durazno · Alojamiento familiar en Andacollo, Neuquén</p>
     </footer>
 
 </body>

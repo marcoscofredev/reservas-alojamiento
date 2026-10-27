@@ -1,0 +1,27 @@
+{
+  "name": "reservas-alojamiento",
+  "version": "1.0.0",
+  "description": "",
+  "main": "availability.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcoscofredev/Reservas-Alojamiento.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/marcoscofredev/Reservas-Alojamiento/issues"
+  },
+  "homepage": "https://github.com/marcoscofredev/Reservas-Alojamiento#readme",
+  "dependencies": {
+    "express": "^5.3.0"
+  }
+}

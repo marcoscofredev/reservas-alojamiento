@@ -1,91 +1,132 @@
-/* El Durazno: paisaje, luz y lectura clara */
+/* El Durazno: una misma grilla, tipografía y ritmo para todas las secciones. */
 :root {
     --paper: #f8f9f5;
     --ink: #202e28;
     --muted: #526159;
     --green: #244d3c;
+    --green-deep: #163729;
+    --tint: #edf2eb;
     --line: #dce3da;
+    --section-space: clamp(64px, 8vw, 104px);
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 24px; }
 body { margin: 0; background: var(--paper); color: var(--ink); font: 17px/1.75 Arial, sans-serif; }
 img { display: block; max-width: 100%; height: auto; }
-h1, h2, h3 { font-family: Georgia, serif; line-height: 1.16; font-weight: 400; }
-h2 { font-size: clamp(2rem, 4vw, 3.2rem); margin: 0 0 28px; letter-spacing: -.035em; }
+h1, h2, h3 { font-family: Georgia, serif; line-height: 1.18; font-weight: 400; }
+h2 { font-size: clamp(2rem, 4vw, 3.2rem); margin: 0 0 24px; letter-spacing: -.035em; overflow-wrap: break-word; }
 h3 { font-size: 1.35rem; }
 p { margin: 0 0 24px; max-width: 68ch; color: var(--muted); }
 a { color: var(--green); text-underline-offset: 5px; }
 a:hover { text-decoration-thickness: 2px; }
-:focus-visible { outline: 3px solid #8b4d24; outline-offset: 5px; }
+:focus-visible { outline: 3px solid #8b4d24; outline-offset: 4px; }
+.skip-link { position: absolute; top: -100px; left: 20px; padding: 12px; background: white; z-index: 10; }
+.skip-link:focus { top: 10px; }
 header { background: #fff; border-bottom: 1px solid var(--line); }
-nav { max-width: 1280px; margin: auto; padding: 22px 40px; display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 12px 26px; }
-nav::before { content: 'EL DURAZNO'; margin-right: auto; font: bold 18px Georgia, serif; letter-spacing: .08em; color: var(--green); }
-nav a { padding: 8px 0; text-decoration: none; font-size: .86rem; font-weight: 600; }
+nav { max-width: 1280px; margin: auto; padding: 20px 40px; display: flex; align-items: center; gap: 28px; }
+nav a { text-decoration: none; }
+.brand { flex-shrink: 0; margin-right: auto; font: 600 22px/1.2 Georgia, serif; letter-spacing: .015em; }
+.brand span { display: block; margin-top: 5px; font: 11px/1.5 Arial, sans-serif; letter-spacing: .04em; color: var(--muted); }
+.nav-links { display: flex; justify-content: flex-end; flex-wrap: wrap; column-gap: 22px; row-gap: 0; }
+.nav-links a { padding: 10px 0; font-size: .8rem; font-weight: 600; }
 nav a:hover { text-decoration: underline; }
 main { max-width: 1280px; padding: 32px 40px 0; margin: auto; }
-section { margin-bottom: 112px; }
-/* La foto abre la portada; el texto conserva un fondo liso. */
-#inicio { display: grid; grid-template-columns: 1.1fr 1fr; column-gap: 64px; align-items: start; padding-bottom: 48px; border-bottom: 1px solid var(--line); }
+section { margin-bottom: var(--section-space); }
+.section-layout { display: grid; grid-template-columns: .9fr 1.1fr; gap: 64px; align-items: start; padding-top: var(--section-space); border-top: 1px solid var(--line); }
+.section-layout > * { min-width: 0; }
+.section-copy p:last-child, .alojamiento-texto p:last-child { margin-bottom: 0; }
+.eyebrow { margin: 0 0 16px; font: 600 11px/1.7 Arial, sans-serif; letter-spacing: .17em; text-transform: uppercase; color: var(--green); }
+.small-note, .demo-note { font-size: .87rem; line-height: 1.7; }
+.demo-note { margin-top: 28px; padding-left: 16px; border-left: 2px solid #a5b4a7; }
+/* La foto y la bienvenida conservan la composición original. */
+#inicio { display: grid; grid-template-columns: 1.1fr 1fr; column-gap: 64px; align-items: start; margin-bottom: 0; padding-bottom: var(--section-space); }
 #inicio img { grid-row: 1; grid-column: 1 / -1; width: 100%; height: clamp(280px, 44vw, 560px); object-fit: cover; object-position: center; margin-bottom: 42px; border-radius: 3px; }
 #inicio h1 { grid-row: 2 / 4; grid-column: 1; font-size: clamp(2.8rem, 6vw, 5.7rem); letter-spacing: -.055em; margin: 0; }
-#inicio h1::before { content: 'EL DURAZNO · ANDACOLLO'; display: block; font: 600 12px/1.6 Arial, sans-serif; letter-spacing: .2em; margin-bottom: 18px; color: var(--green); }
+#inicio h1::before { content: 'EL DURAZNO · ANDACOLLO'; display: block; font: 600 11px/1.7 Arial, sans-serif; letter-spacing: .17em; margin-bottom: 18px; color: var(--green); }
 #inicio p { grid-row: 2; grid-column: 2; font-size: 1.1rem; margin: 4px 0 24px; }
-#inicio a, button { background: var(--green); color: white; display: inline-block; padding: 14px 26px; font: 600 .95rem/1.5 Arial, sans-serif; border: 1px solid var(--green); border-radius: 3px; text-decoration: none; cursor: pointer; }
+#inicio a, button { background: var(--green); color: white; display: inline-block; padding: 13px 24px; font: 600 .93rem/1.5 Arial, sans-serif; border: 1px solid var(--green); border-radius: 3px; text-decoration: none; cursor: pointer; }
 #inicio a { grid-row: 3; grid-column: 2; justify-self: start; }
-#inicio a:hover, button:hover { background: #163729; }
-#galeria { display: grid; grid-template-columns: .65fr 1.35fr; gap: 48px; align-items: center; }
-#galeria h2::before, #alojamiento h2::before, #ubicacion h2::before, #contacto h2::before { display: block; font: 600 12px/1.6 Arial, sans-serif; letter-spacing: .18em; margin-bottom: 18px; color: var(--green); }
-#galeria h2::before { content: 'UNA MIRADA AL LUGAR'; }
+#inicio a:hover, button:hover { background: var(--green-deep); }
+button:disabled { opacity: .55; cursor: not-allowed; }
+#galeria { align-items: center; }
 #galeria img { width: 100%; max-height: 520px; object-fit: cover; border-radius: 3px; }
-#contacto { padding: 56px; background: #eaf0e8; border-radius: 4px; display: grid; grid-template-columns: .8fr 1.2fr; gap: 48px; }
-#contacto h2::before { content: 'PLANIFICÁ TU ESTADÍA'; }
+#alojamiento { align-items: center; }
+.servicios { width: 100%; max-width: 360px; height: auto; margin: 0 auto; }
 form { display: flex; flex-direction: column; min-width: 0; }
-label { font-size: .9rem; font-weight: 600; margin: 0 0 6px; }
-input, textarea { width: 100%; min-width: 0; border: 1px solid #a5b4a7; background: #fff; padding: 12px 14px; border-radius: 3px; color: var(--ink); font: inherit; margin-bottom: 20px; }
+label { display: block; font-size: .86rem; font-weight: 600; margin-bottom: 7px; }
+input, textarea { display: block; width: 100%; min-width: 0; border: 1px solid #a5b4a7; background: #fff; padding: 11px 12px; border-radius: 3px; color: var(--ink); font: inherit; margin-bottom: 20px; }
 textarea { min-height: 150px; resize: vertical; }
 button { align-self: flex-start; }
-#alojamiento { padding: 64px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; align-items: center; }
-#alojamiento h2::before { content: 'TU LUGAR PARA DESCANSAR'; }
-#alojamiento p { margin: 0; font-size: 1.1rem; }
-#ubicacion { display: grid; grid-template-columns: 1fr 1fr; gap: 0 56px; }
-#ubicacion h2 { grid-column: 1; }
-#ubicacion h2::before { content: 'NORTE NEUQUINO'; }
-#ubicacion p { grid-column: 1; }
-iframe { grid-column: 2; grid-row: 1 / 4; width: 100%; height: 100%; min-height: 420px; border: 0; border-radius: 4px; }
-#preguntas-frecuentes { max-width: 860px; margin-left: auto; margin-right: auto; }
-#preguntas-frecuentes h2 { margin-bottom: 48px; }
-#preguntas-frecuentes h3 { border-top: 1px solid var(--line); margin: 32px 0 14px; padding-top: 26px; }
-#preguntas-frecuentes p { margin-bottom: 16px; }
+.contact-form { padding: 32px; background: var(--tint); border: 1px solid var(--line); border-radius: 4px; }
+iframe { display: block; width: 100%; height: 440px; border: 0; border-radius: 4px; }
+.faq-content h3 { border-top: 1px solid var(--line); margin: 28px 0 14px; padding-top: 24px; }
+.faq-content h3:first-child { border-top: 0; margin-top: 0; padding-top: 0; }
+.faq-content p { margin-bottom: 16px; }
 footer { background: #1e352a; padding: 36px 24px; text-align: center; }
 footer p { margin: auto; color: #eef3eb; font-size: .85rem; }
-@media (max-width: 850px) {
-    nav { justify-content: flex-start; padding: 18px 24px; gap: 8px 22px; }
-    nav::before { flex-basis: 100%; margin-bottom: 8px; }
+/* Calendario propio: mismos colores y proporciones que el resto del sitio. */
+.booking-panel { padding: 28px; border: 1px solid var(--line); background: #fff; border-radius: 4px; }
+.calendar-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.calendar-toolbar h3 { margin: 0; font-size: 1.5rem; text-align: center; text-transform: capitalize; }
+.calendar-nav { display: grid; place-items: center; flex: 0 0 40px; width: 40px; height: 40px; padding: 0; background: transparent; color: var(--green); border-color: var(--line); font: 26px/1 Arial, sans-serif; }
+.calendar-nav:hover:not(:disabled) { background: var(--tint); }
+.calendar-nav:disabled { opacity: .3; }
+.calendar-help { font-size: .82rem; line-height: 1.55; min-height: 40px; margin: 18px 0; }
+.calendar-table { width: 100%; border-collapse: separate; border-spacing: 3px; table-layout: fixed; }
+.calendar-table th { padding: 5px 0 10px; font: 600 .75rem/1.3 Arial, sans-serif; color: var(--muted); }
+.calendar-table th abbr { text-decoration: none; }
+.calendar-table td { padding: 0; text-align: center; height: 43px; }
+.calendar-day { display: block; width: 100%; min-height: 42px; padding: 6px 0; border: 1px solid transparent; background: #f2f5ef; color: var(--ink); font: 500 .9rem/1.5 Arial, sans-serif; border-radius: 3px; }
+.calendar-day:hover:not(:disabled) { background: #d9e6d6; border-color: var(--green); }
+.calendar-day:disabled { opacity: 1; color: #8b928d; background: #f7f8f6; }
+.calendar-day.is-occupied { background: repeating-linear-gradient(135deg, #e7e8e4, #e7e8e4 4px, #f2f2ef 4px, #f2f2ef 8px); color: #626b64; text-decoration: line-through; }
+.calendar-day.is-exit-only { border: 1px dashed var(--green); text-decoration: none; color: var(--green); }
+.calendar-day.is-today:not(.is-selected) { border-bottom: 2px solid var(--green); }
+.calendar-day.is-in-range { background: #dce9d9; color: var(--green); }
+.calendar-day.is-selected, .calendar-day.is-selected:hover:not(:disabled) { background: var(--green); color: #fff; border-color: var(--green); text-decoration: none; }
+.calendar-legend { display: flex; flex-wrap: wrap; gap: 8px 16px; list-style: none; padding: 0; margin: 18px 0 8px; font-size: .72rem; color: var(--muted); }
+.calendar-legend li { display: flex; align-items: center; gap: 6px; }
+.legend-dot { display: inline-block; width: 11px; height: 11px; border-radius: 2px; border: 1px solid #b3c2ad; }
+.legend-dot.available { background: #f2f5ef; }
+.legend-dot.occupied { background: repeating-linear-gradient(135deg, #b9c1b7, #b9c1b7 2px, #f2f2ef 2px, #f2f2ef 4px); }
+.legend-dot.selected { background: var(--green); border-color: var(--green); }
+.text-button { padding: 8px 0; border: 0; color: var(--green); background: transparent; text-decoration: underline; text-underline-offset: 4px; font-weight: 500; font-size: .8rem; }
+.text-button:hover { color: var(--green-deep); background: transparent; }
+.booking-result { font-size: .9rem; margin: 20px 0 0; padding: 14px 16px; border-left: 3px solid var(--green); background: var(--tint); }
+.booking-result:empty { display: none; }
+.booking-result[data-state='error'] { background: #f8eee6; border-color: #934e2d; color: #743d25; }
+@media (max-width: 1000px) {
+    nav { flex-wrap: wrap; gap: 12px; }
+    .nav-links { justify-content: flex-start; }
+    .section-layout { gap: 36px; grid-template-columns: .85fr 1.15fr; }
+    .booking-panel { padding: 20px; }
+}
+@media (max-width: 760px) {
+    nav { padding: 20px 24px 12px; }
+    .brand { flex-basis: 100%; }
+    .nav-links { column-gap: 20px; }
     main { padding: 24px 24px 0; }
-    section { margin-bottom: 72px; }
+    .section-layout { grid-template-columns: 1fr; gap: 28px; }
     #inicio { column-gap: 28px; }
-    #contacto { padding: 32px; grid-template-columns: 1fr; gap: 12px; }
-    #alojamiento, #galeria { grid-template-columns: 1fr; gap: 20px; }
-    #ubicacion { display: block; }
-    iframe { height: 380px; min-height: 0; margin-top: 12px; }
+    #ubicacion iframe { height: 380px; }
+    #galeria img { max-height: 440px; }
+    .booking-panel { max-width: 580px; width: 100%; }
+    .servicios { margin: 0; }
 }
 @media (max-width: 540px) {
     body { font-size: 16px; }
     main { padding: 16px 20px 0; }
-    nav { padding: 16px 20px; }
-    nav a { font-size: .8rem; }
-    #inicio { display: flex; flex-direction: column; padding-bottom: 32px; }
+    nav { padding: 18px 20px 10px; }
+    .nav-links a { font-size: .78rem; }
+    #inicio { display: flex; flex-direction: column; }
     #inicio img { order: -1; height: 300px; margin-bottom: 28px; }
     #inicio h1 { font-size: 3rem; margin-bottom: 22px; }
     #inicio p { font-size: 1rem; }
-    #contacto { padding: 26px 20px; }
-    #alojamiento { padding: 40px 0; }
-    iframe { height: 320px; }
+    .contact-form { padding: 24px 20px; }
+    .booking-panel { padding: 16px 12px; }
+    .calendar-toolbar h3 { font-size: 1.3rem; }
+    .calendar-table { border-spacing: 2px; }
+    .calendar-day { min-height: 40px; }
+    #ubicacion iframe { height: 320px; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-.servicios {
-    width: 100%;
-    max-width: 360px;
-    height: auto;
-    margin: 0 auto;
-}
