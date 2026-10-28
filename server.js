@@ -1,28 +1,106 @@
 const express = require("express");
+const Availability = require("./availability");
+const { createPostgresStore } = require("./reservation-store");
 
-const app = express();
-app.get("/api/reservas", function (req, res) {
-    const reservations = [
-        { checkIn: "2026-11-10", checkOut: "2026-11-15" },
-        { checkIn: "2026-11-20", checkOut: "2026-11-25" }
-    ];
+function createApp({ store = createPostgresStore(require("./database")), now = () => new Date() } = {}) {
+    const app = express();
+    app.use(express.json({ limit: "4kb" }));
 
-    res.json(reservations);
-});
+    app.get("/api/reservas", async function (req, res) {
+        res.set("Cache-Control", "no-store");
+        res.json(await store.list());
+    });
+    app.get("/api/disponibilidad", async function (req, res) {
+        const checkIn = req.query.checkIn;
+        const checkOut = req.query.checkOut;
 
-app.get("/", function (req, res) {
-    res.sendFile("index.html", { root: __dirname });
-});
+        if (typeof checkIn !== "string" || typeof checkOut !== "string") {
+            res.status(400).json({
+                error: "Indicá una fecha de entrada y otra de salida."
+            });
+            return;
+        }
 
-app.get(
-    ["/style.css", "/script.js", "/availability.js"],
-    function (req, res) {
-        res.sendFile(req.path.slice(1), { root: __dirname });
-    }
-);
+        const limits = Availability.getDateLimits(now());
+        const error = Availability.validate(checkIn, checkOut, [], limits);
 
-app.use("/imagenes", express.static(__dirname + "/imagenes"));
+        if (error) {
+            res.status(400).json({ error });
+            return;
+        }
 
-app.listen(3000, "127.0.0.1", function () {
-    console.log("Servidor listo en http://127.0.0.1:3000");
-});
+        const available = await store.isAvailable(checkIn, checkOut);
+
+        res.set("Cache-Control", "no-store");
+        res.json({
+            available: available,
+            nights: Availability.nights(checkIn, checkOut),
+            demo: true
+        });
+    });
+
+    app.post("/api/reservas", async function (req, res) {
+        if (!req.is("application/json")) {
+            res.status(415).json({ error: "Enviá la solicitud en formato JSON." });
+            return;
+        }
+        const { checkIn, checkOut } = req.body || {};
+        if (typeof checkIn !== "string" || typeof checkOut !== "string") {
+            res.status(400).json({ error: "Indicá una fecha de entrada y otra de salida." });
+            return;
+        }
+        const error = Availability.validate(checkIn, checkOut, [], Availability.getDateLimits(now()));
+        if (error) {
+            res.status(400).json({ error });
+            return;
+        }
+        let reservation;
+        try {
+            reservation = await store.create(checkIn, checkOut);
+        } catch (error) {
+            if (error.code === "23P01") {
+                res.status(409).json({ error: "Esas fechas ya están ocupadas. Elegí otro período." });
+                return;
+            }
+            throw error;
+        }
+        res.status(201).json({
+            reservation,
+            nights: Availability.nights(checkIn, checkOut),
+            demo: true
+        });
+    });
+    app.get("/", function (req, res) {
+        res.sendFile("index.html", { root: __dirname });
+    });
+    app.get(
+        ["/style.css", "/script.js", "/availability.js"],
+        function (req, res) {
+            res.sendFile(req.path.slice(1), { root: __dirname });
+        }
+    );
+    app.use("/imagenes", express.static(__dirname + "/imagenes"));
+
+    app.use(function (error, req, res, next) {
+        if (error.type === "entity.parse.failed") {
+            res.status(400).json({ error: "El contenido JSON no es válido." });
+            return;
+        }
+        if (error.type === "entity.too.large") {
+            res.status(413).json({ error: "La solicitud es demasiado grande." });
+            return;
+        }
+        console.error("No se pudo completar la operación:", error.code || error.name);
+        res.set("Cache-Control", "no-store");
+        res.status(503).json({ error: "No pudimos acceder a las reservas. Intentá nuevamente más tarde." });
+    });
+    return app;
+}
+
+if (require.main === module) {
+    createApp().listen(3000, "127.0.0.1", function () {
+        console.log("Servidor listo en http://127.0.0.1:3000");
+    });
+}
+
+module.exports = { createApp };

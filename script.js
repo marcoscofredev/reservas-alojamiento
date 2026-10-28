@@ -1,5 +1,10 @@
 const selection = { checkIn: "", checkOut: "" };
 const resultado = document.getElementById("resultado-disponibilidad");
+const reservationActions = document.getElementById("reserva-acciones");
+const reserveButton = document.getElementById("crear-reserva-prueba");
+const reservationResult = document.getElementById("resultado-reserva");
+let verifiedSelection = null;
+let reservationInFlight = false;
 let reservations = [];
 let limits = Availability.getDateLimits();
 const calendar = document.getElementById("calendario");
@@ -92,6 +97,7 @@ function renderCalendar(focusDate) {
 }
 
 function selectDate(date) {
+    if (reservationInFlight) return;
     if (selection.checkIn && !selection.checkOut && canEnd(date)) {
         selection.checkOut = date;
     } else if (Availability.canStart(date, reservations, limits)) {
@@ -99,6 +105,7 @@ function selectDate(date) {
         selection.checkOut = "";
     }
     showResult("");
+    reservationResult.textContent = "";
     renderCalendar(date);
     updateResult();
 }
@@ -115,28 +122,164 @@ function changeMonth(direction) {
 previousMonth.addEventListener("click", () => changeMonth(-1));
 nextMonth.addEventListener("click", () => changeMonth(1));
 document.getElementById("limpiar-fechas").addEventListener("click", () => {
+    if (reservationInFlight) return;
     selection.checkIn = "";
     selection.checkOut = "";
     showResult("");
+    verifiedSelection = null;
+    reservationActions.hidden = true;
+    availabilityRequestId++;
     renderCalendar();
 });
-function updateResult() {
+let availabilityRequestId = 0;
+async function updateResult() {
+    const requestId = ++availabilityRequestId;
+    verifiedSelection = null;
+    reservationActions.hidden = true;
+
     applyLimits();
+
     const checkIn = selection.checkIn;
     const checkOut = selection.checkOut;
+
     if (!checkIn || !checkOut) {
         showResult("");
         return;
     }
-    const error = Availability.validate(checkIn, checkOut, reservations, limits);
+
+    const error = Availability.validate(checkIn, checkOut, [], limits);
+
     if (error) {
         showResult(error, "error");
         return;
     }
-    const nights = Availability.nights(checkIn, checkOut);
-    const format = value => new Intl.DateTimeFormat("es-AR", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" }).format(new Date(`${value}T00:00:00Z`));
-    showResult(`Entrada: ${format(checkIn)}. Salida: ${format(checkOut)}. Tu estadía es de ${nights} ${nights === 1 ? "noche" : "noches"}. Las fechas están libres en esta demostración. Esto no confirma una reserva real.`, "success");
+
+    showResult("Consultando disponibilidad...");
+
+    try {
+        const query = new URLSearchParams({ checkIn, checkOut });
+        const response = await fetch(`/api/disponibilidad?${query}`, { cache: "no-store" });
+        const data = await response.json();
+
+        if (
+            requestId !== availabilityRequestId ||
+            checkIn !== selection.checkIn ||
+            checkOut !== selection.checkOut
+        ) {
+            return;
+        }
+
+        if (!response.ok) {
+            throw new Error("Falló la consulta.");
+        }
+
+        if (
+            typeof data.available !== "boolean" ||
+            !Number.isInteger(data.nights) ||
+            data.nights !== Availability.nights(checkIn, checkOut) ||
+            data.demo !== true
+        ) {
+            throw new Error("Respuesta inválida.");
+        }
+
+        if (!data.available) {
+            showResult(
+                "El servidor indica que esas fechas no están disponibles.",
+                "error"
+            );
+            return;
+        }
+
+        const format = value =>
+            new Intl.DateTimeFormat("es-AR", {
+                day: "numeric",
+                month: "short",
+                year: "numeric",
+                timeZone: "UTC"
+            }).format(new Date(`${value}T00:00:00Z`));
+
+        showResult(
+            `Entrada: ${format(checkIn)}. Salida: ${format(checkOut)}. ` +
+            `El servidor indica disponibilidad para ${data.nights} ` +
+            `${data.nights === 1 ? "noche" : "noches"}. ` +
+            "Consulta de prueba: no confirma una reserva real.",
+            "success"
+        );
+        verifiedSelection = { checkIn, checkOut };
+        reservationActions.hidden = false;
+    } catch {
+        if (
+            requestId === availabilityRequestId &&
+            checkIn === selection.checkIn &&
+            checkOut === selection.checkOut
+        ) {
+            showResult(
+                "No pudimos consultar la disponibilidad. Probá nuevamente.",
+                "error"
+            );
+        }
+    }
 }
+
+reserveButton.addEventListener("click", async function () {
+    if (reservationInFlight || !verifiedSelection ||
+        selection.checkIn !== verifiedSelection.checkIn || selection.checkOut !== verifiedSelection.checkOut) return;
+
+    const requested = { ...verifiedSelection };
+    let created = false;
+    reservationInFlight = true;
+    reserveButton.disabled = true;
+    reserveButton.setAttribute("aria-busy", "true");
+    calendar.inert = true;
+    reservationResult.dataset.state = "";
+    reservationResult.textContent = "Enviando la solicitud de prueba...";
+
+    try {
+        const response = await fetch("/api/reservas", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(requested)
+        });
+        const data = await response.json();
+        verifiedSelection = null;
+        reservationActions.hidden = true;
+
+        if (response.status === 409) {
+            reservationResult.dataset.state = "error";
+            reservationResult.textContent = "Esas fechas se ocuparon antes de enviar la solicitud. Elegí otras fechas.";
+            selection.checkIn = "";
+            selection.checkOut = "";
+            await loadReservations();
+            return;
+        }
+        if (!response.ok || data.demo !== true || !data.reservation ||
+            typeof data.reservation.id !== "string" || data.reservation.checkIn !== requested.checkIn ||
+            data.reservation.checkOut !== requested.checkOut || data.reservation.status !== "demo") {
+            throw new Error("No se pudo guardar la reserva.");
+        }
+
+        created = true;
+        const format = value => dateFormatter.format(new Date(`${value}T00:00:00Z`));
+        reservationResult.dataset.state = "success";
+        reservationResult.textContent = `Reserva guardada del ${format(requested.checkIn)} al ${format(requested.checkOut)}. Las noches seleccionadas quedaron apartadas.`;
+        selection.checkIn = "";
+        selection.checkOut = "";
+        await loadReservations();
+    } catch {
+        verifiedSelection = null;
+        reservationActions.hidden = true;
+        reservationResult.dataset.state = created ? "success" : "error";
+        reservationResult.textContent = created
+            ? "La reserva quedó guardada, pero no pudimos actualizar el calendario. Recargá la página."
+            : "No pudimos completar la solicitud. Volvé a consultar disponibilidad antes de intentar nuevamente.";
+        showResult("Volvé a consultar disponibilidad o recargá la página antes de continuar.", "error");
+    } finally {
+        calendar.inert = false;
+        reservationInFlight = false;
+        reserveButton.disabled = false;
+        reserveButton.setAttribute("aria-busy", "false");
+    }
+});
 document.getElementById("form-contacto").addEventListener("submit", event => event.preventDefault());
 window.addEventListener("pageshow", () => {
     if (!calendar.hidden) {
@@ -146,9 +289,11 @@ window.addEventListener("pageshow", () => {
 });
 async function loadReservations() {
     calendar.hidden = true;
+    reservationActions.hidden = true;
+    verifiedSelection = null;
     showResult("Cargando disponibilidad...");
 
-    const response = await fetch("/api/reservas");
+    const response = await fetch("/api/reservas", { cache: "no-store" });
 
     if (!response.ok) {
         throw new Error("No se pudieron obtener las reservas.");

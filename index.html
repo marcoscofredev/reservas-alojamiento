@@ -36,7 +36,7 @@
                 <p class="eyebrow">Elegí tu próxima escapada</p>
                 <h2 id="titulo-disponibilidad">Disponibilidad</h2>
                 <p>Elegí una fecha de entrada y otra de salida. Podés llegar el mismo día en que termina otra estadía.</p>
-                <p class="demo-note"><strong>Calendario de prueba.</strong> Las fechas ocupadas son ejemplos. La consulta no confirma una reserva real.</p>
+                <p class="demo-note"><strong>Calendario de prueba.</strong> Las reservas simuladas se guardan en la base de datos y se conservan al reiniciar el servidor. No hay cobros ni reservas reales.</p>
             </div>
             <div class="booking-panel">
                 <div class="calendar" id="calendario" hidden>
@@ -66,6 +66,11 @@
                     <button class="text-button" type="button" id="limpiar-fechas">Borrar fechas</button>
                 </div>
                 <p id="resultado-disponibilidad" class="booking-result" role="status" aria-live="polite" aria-atomic="true"></p>
+                <div id="reserva-acciones" class="reservation-actions" hidden>
+                    <button type="button" id="crear-reserva-prueba">Guardar reserva</button>
+                    <p class="small-note">Las fechas quedarán guardadas y se marcarán como ocupadas.</p>
+                </div>
+                <p id="resultado-reserva" class="booking-result" role="status" aria-live="polite" aria-atomic="true"></p>
                 <noscript>Para consultar fechas, activá JavaScript en tu navegador. El calendario es una demostración.</noscript>
             </div>
         </section>

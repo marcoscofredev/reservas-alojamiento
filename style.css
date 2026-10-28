@@ -95,6 +95,8 @@ footer p { margin: auto; color: #eef3eb; font-size: .85rem; }
 .booking-result { font-size: .9rem; margin: 20px 0 0; padding: 14px 16px; border-left: 3px solid var(--green); background: var(--tint); }
 .booking-result:empty { display: none; }
 .booking-result[data-state='error'] { background: #f8eee6; border-color: #934e2d; color: #743d25; }
+.reservation-actions { margin-top: 20px; }
+.reservation-actions .small-note { margin: 12px 0 0; }
 @media (max-width: 1000px) {
     nav { flex-wrap: wrap; gap: 12px; }
     .nav-links { justify-content: flex-start; }
