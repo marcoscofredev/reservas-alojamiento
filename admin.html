@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Administración · El Durazno</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/admin.css">
+    <script src="/admin-client.js" defer></script>
+</head>
+<body>
+    <header>
+        <nav aria-label="Administración">
+            <a class="brand" href="/">El Durazno<span>Administración privada</span></a>
+            <a href="/">Ver sitio público</a>
+        </nav>
+    </header>
+    <main class="admin-main">
+        <div class="admin-heading">
+            <p class="eyebrow">Tu alojamiento, organizado</p>
+            <h1>Panel de reservas</h1>
+            <p>Consultá las estadías y los datos de contacto en un espacio privado.</p>
+        </div>
+        <p id="admin-message" class="booking-result" role="status" aria-live="polite"></p>
+        <section id="login-panel" class="admin-login" aria-labelledby="login-title" hidden>
+            <h2 id="login-title">Ingresar</h2>
+            <form id="login-form">
+                <label for="admin-username">Usuario</label>
+                <input id="admin-username" name="username" autocomplete="username" maxlength="64" required>
+                <label for="admin-password">Contraseña</label>
+                <input id="admin-password" name="password" type="password" autocomplete="current-password" maxlength="128" required>
+                <button id="login-button" type="submit">Entrar al panel</button>
+            </form>
+        </section>
+        <section id="private-panel" aria-labelledby="reservations-title" hidden>
+            <div class="admin-session">
+                <p id="admin-user"></p>
+                <button type="button" id="logout-button" class="text-button">Cerrar sesión</button>
+            </div>
+            <div class="admin-list-heading">
+                <h2 id="reservations-title">Reservas</h2>
+                <button type="button" id="refresh-reservations">Actualizar</button>
+            </div>
+            <p class="demo-note">Modo de prueba. Todavía no se gestionan pagos ni avisos. La cancelación desde este panel está habilitada para las reservas de prueba y libera sus noches.</p>
+            <div class="admin-filters">
+                <label for="reservation-filter">Mostrar</label>
+                <select id="reservation-filter">
+                    <option value="active">Activas</option>
+                    <option value="cancelled">Canceladas</option>
+                    <option value="all">Todas</option>
+                </select>
+                <p id="reservation-count" aria-live="polite"></p>
+            </div>
+            <div id="admin-reservations" aria-busy="false"></div>
+            <div class="admin-pagination">
+                <button type="button" id="previous-reservations">Anteriores</button>
+                <p id="reservation-page" aria-live="polite"></p>
+                <button type="button" id="next-reservations">Siguientes</button>
+            </div>
+        </section>
+        <noscript>Activá JavaScript para ingresar al panel.</noscript>
+    </main>
+</body>
+</html>

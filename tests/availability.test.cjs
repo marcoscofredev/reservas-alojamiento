@@ -46,5 +46,4 @@ test("Cuenta noches a través de meses, años, años bisiestos y cambios de hora
     assert.equal(dates.nights("2026-12-31", "2027-01-01"), 1);
     assert.equal(dates.nights("2028-02-28", "2028-03-01"), 2);
     assert.equal(dates.nights("2026-03-07", "2026-03-09"), 2);
-    assert.equal(dates.addDays("2028-02-28", 1), "2028-02-29");
 });

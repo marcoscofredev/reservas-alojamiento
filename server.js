@@ -1,13 +1,22 @@
 const express = require("express");
 const Availability = require("./availability");
 const { createPostgresStore } = require("./reservation-store");
+const { validateGuest } = require("./guest");
+const { configureSecurity } = require("./security");
+const { mountAdmin } = require("./admin-routes");
 
-function createApp({ store = createPostgresStore(require("./database")), now = () => new Date() } = {}) {
+function createApp({ store, admin, now = () => new Date() } = {}) {
+    if (!store) {
+        const pool = require("./database");
+        store = createPostgresStore(pool);
+        if (admin === undefined) admin = { pool, secret: process.env.SESSION_SECRET };
+    }
     const app = express();
+    configureSecurity(app);
     app.use(express.json({ limit: "4kb" }));
+    mountAdmin(app, admin);
 
     app.get("/api/reservas", async function (req, res) {
-        res.set("Cache-Control", "no-store");
         res.json(await store.list());
     });
     app.get("/api/disponibilidad", async function (req, res) {
@@ -31,9 +40,8 @@ function createApp({ store = createPostgresStore(require("./database")), now = (
 
         const available = await store.isAvailable(checkIn, checkOut);
 
-        res.set("Cache-Control", "no-store");
         res.json({
-            available: available,
+            available,
             nights: Availability.nights(checkIn, checkOut),
             demo: true
         });
@@ -55,8 +63,13 @@ function createApp({ store = createPostgresStore(require("./database")), now = (
             return;
         }
         let reservation;
+        const guestResult = validateGuest(req.body.guest);
+        if (guestResult.error) {
+            res.status(400).json({ error: guestResult.error });
+            return;
+        }
         try {
-            reservation = await store.create(checkIn, checkOut);
+            reservation = await store.create(checkIn, checkOut, guestResult.guest);
         } catch (error) {
             if (error.code === "23P01") {
                 res.status(409).json({ error: "Esas fechas ya están ocupadas. Elegí otro período." });
@@ -74,12 +87,16 @@ function createApp({ store = createPostgresStore(require("./database")), now = (
         res.sendFile("index.html", { root: __dirname });
     });
     app.get(
-        ["/style.css", "/script.js", "/availability.js"],
+        ["/style.css", "/script.js", "/availability.js", "/gallery.js"],
         function (req, res) {
             res.sendFile(req.path.slice(1), { root: __dirname });
         }
     );
     app.use("/imagenes", express.static(__dirname + "/imagenes"));
+
+    app.use((req, res) => {
+        res.status(404).json({ error: "No se encontró el recurso solicitado." });
+    });
 
     app.use(function (error, req, res, next) {
         if (error.type === "entity.parse.failed") {

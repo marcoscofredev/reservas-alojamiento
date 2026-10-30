@@ -1,0 +1,29 @@
+.admin-main { max-width: 1080px; padding-bottom: 64px; }
+.admin-heading { padding: 32px 0 12px; }
+.admin-heading h1 { font-size: clamp(2.4rem, 5vw, 4rem); margin: 0 0 16px; letter-spacing: -.04em; }
+.admin-main section { margin: 28px 0 0; }
+.admin-login { max-width: 460px; background: #fff; border: 1px solid var(--line); padding: 32px; border-radius: 4px; }
+.admin-login h2 { font-size: 2rem; }
+.admin-session, .admin-list-heading, .admin-pagination { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+.admin-session { border-bottom: 1px solid var(--line); padding-bottom: 16px; margin-bottom: 32px; }
+.admin-session p, .admin-list-heading h2, .admin-pagination p { margin: 0; }
+.admin-filters { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin: 28px 0; }
+.admin-filters label, .admin-filters p { margin: 0; }
+.admin-filters select { font: inherit; color: var(--ink); padding: 8px 12px; border: 1px solid #a5b4a7; border-radius: 3px; background: white; }
+.admin-filters p { margin-left: auto; font-size: .9rem; }
+.reservation-card { border: 1px solid var(--line); background: white; border-radius: 4px; padding: 24px; margin-bottom: 20px; }
+.reservation-card h3 { margin: 0 0 16px; }
+.reservation-card dl { display: grid; grid-template-columns: 140px minmax(0, 1fr); column-gap: 20px; row-gap: 8px; margin: 0 0 24px; }
+.reservation-card dt { color: var(--muted); }
+.reservation-card dd { margin: 0; overflow-wrap: anywhere; }
+.reservation-card .small-note { margin-bottom: 0; }
+.admin-pagination { margin-top: 28px; }
+.cancel-reservation { color: #743d25; border-color: #bf9b86; background: #fff; }
+.cancel-reservation:hover { color: #fff; background: #743d25; }
+@media (max-width: 540px) {
+    .admin-login, .reservation-card { padding: 24px 20px; }
+    .reservation-card dl { grid-template-columns: 1fr; gap: 4px; }
+    .reservation-card dd { margin-bottom: 12px; }
+    .admin-filters p { flex-basis: 100%; margin-left: 0; }
+    .admin-pagination button { padding: 10px 14px; }
+}

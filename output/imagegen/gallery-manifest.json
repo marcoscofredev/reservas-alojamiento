@@ -1,0 +1,114 @@
+[
+  {
+    "key": "frente-1",
+    "source": "frente-1-retoque-natural-v2.png",
+    "width": 1672,
+    "height": 941,
+    "thumbnailWidth": 640,
+    "thumbnailHeight": 360
+  },
+  {
+    "key": "matrimonial",
+    "source": "matrimonial-retoque-natural.png",
+    "width": 1672,
+    "height": 941,
+    "thumbnailWidth": 640,
+    "thumbnailHeight": 360
+  },
+  {
+    "key": "cocina",
+    "source": "cocina-retoque-natural-v2.png",
+    "width": 1672,
+    "height": 941,
+    "thumbnailWidth": 640,
+    "thumbnailHeight": 360
+  },
+  {
+    "key": "sala-de-estar",
+    "source": "sala-de-estar-retoque-natural.png",
+    "width": 1672,
+    "height": 941,
+    "thumbnailWidth": 640,
+    "thumbnailHeight": 360
+  },
+  {
+    "key": "habitacion",
+    "source": "habitacion-retoque-natural.png",
+    "width": 1672,
+    "height": 941,
+    "thumbnailWidth": 640,
+    "thumbnailHeight": 360
+  },
+  {
+    "key": "comedor",
+    "source": "comedor-retoque-natural.png",
+    "width": 1672,
+    "height": 941,
+    "thumbnailWidth": 640,
+    "thumbnailHeight": 360
+  },
+  {
+    "key": "frente-2",
+    "source": "frente-2-retoque-natural.png",
+    "width": 1672,
+    "height": 941,
+    "thumbnailWidth": 640,
+    "thumbnailHeight": 360
+  },
+  {
+    "key": "frente-entrada",
+    "source": "frente-entrada-retoque-natural.png",
+    "width": 1672,
+    "height": 941,
+    "thumbnailWidth": 640,
+    "thumbnailHeight": 360
+  },
+  {
+    "key": "cocina-2",
+    "source": "cocina-2-retoque-natural.png",
+    "width": 1672,
+    "height": 941,
+    "thumbnailWidth": 640,
+    "thumbnailHeight": 360
+  },
+  {
+    "key": "bano",
+    "source": "bano-retoque-natural.png",
+    "width": 941,
+    "height": 1672,
+    "thumbnailWidth": 640,
+    "thumbnailHeight": 1137
+  },
+  {
+    "key": "ducha",
+    "source": "ducha-retoque-natural.png",
+    "width": 1672,
+    "height": 941,
+    "thumbnailWidth": 640,
+    "thumbnailHeight": 360
+  },
+  {
+    "key": "lavamanos",
+    "source": "lavamanos-retoque-natural.png",
+    "width": 1672,
+    "height": 941,
+    "thumbnailWidth": 640,
+    "thumbnailHeight": 360
+  },
+  {
+    "key": "pueblo-1",
+    "source": "pueblo-1-retoque-natural.png",
+    "width": 1672,
+    "height": 941,
+    "thumbnailWidth": 640,
+    "thumbnailHeight": 360
+  },
+  {
+    "key": "pueblo-2",
+    "source": "pueblo-2-retoque-natural.png",
+    "width": 1672,
+    "height": 941,
+    "thumbnailWidth": 640,
+    "thumbnailHeight": 360
+  }
+]

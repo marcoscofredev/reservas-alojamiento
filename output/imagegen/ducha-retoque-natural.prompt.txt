@@ -1,0 +1,5 @@
+Tool: built-in image_gen; edit mode.
+Source: imagenes/ducha.jpeg
+Output: imagenes/ducha-retoque-natural.png
+
+Use case: lighting-weather. Apply only a very mild, realistic photographic exposure and white-balance correction to the supplied real photograph. Keep exact framing, perspective, geometry, actual objects and all fine scene details. No scene redesign, additions, invented views, new decor, repainting, smoothing into an illustration, saturation boost or HDR. Output a single natural photograph in the same aspect ratio with no text overlay, watermark or collage. Preserve the exact original bathroom scene: metal showerhead and angle, curtain rod and all rings, white shower curtain with its existing gray pattern and purple butterfly ornaments, existing wall tile layout and aged ceiling wood. Do not add a glass shower enclosure, replace curtain or tiles, change fittings or show any part of the room not visible in the source. No objects need removing.

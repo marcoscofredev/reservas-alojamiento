@@ -7,9 +7,6 @@ const Availability = (() => {
         if (!Number.isFinite(timestamp)) return NaN;
         return new Date(timestamp).toISOString().slice(0, 10) === value ? timestamp : NaN;
     }
-    function addDays(value, amount) {
-        return new Date(dateNumber(value) + amount * millisecondsPerDay).toISOString().slice(0, 10);
-    }
     function getDateLimits(now = new Date()) {
         const year = now.getFullYear(), month = now.getMonth(), day = now.getDate();
         const format = (y, m, d) => `${y}-${String(m + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
@@ -33,7 +30,7 @@ const Availability = (() => {
     function canStart(date, reservations, limits) {
         return date >= limits.min && date < limits.max && !isOccupied(date, reservations);
     }
-    return { addDays, getDateLimits, isOccupied, hasOverlap, validate, canStart,
+    return { getDateLimits, isOccupied, hasOverlap, validate, canStart,
         nights: (start, end) => (dateNumber(end) - dateNumber(start)) / millisecondsPerDay };
 })();
 if (typeof module !== "undefined" && module.exports) module.exports = Availability;

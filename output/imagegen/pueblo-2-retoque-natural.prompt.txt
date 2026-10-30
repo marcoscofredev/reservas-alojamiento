@@ -1,0 +1,5 @@
+Tool: built-in image_gen; edit mode.
+Source: imagenes/pueblo 2.jpeg
+Output: imagenes/pueblo-2-retoque-natural.png
+
+Use case: lighting-weather. Apply only a very mild, realistic photographic exposure and white-balance correction to the supplied real photograph. Keep exact framing, perspective, geometry, actual objects and all fine scene details. No scene redesign, additions, invented views, new decor, repainting, smoothing into an illustration, saturation boost or HDR. Output a single natural photograph in the same aspect ratio with no text overlay, watermark or collage. Keep this exact Andacollo monument, all original letters ANDACOLLO exactly spelled and shaped, central sculpture, ramps, steps, stone cladding, puddles, same parked cars, buildings, trees, poles and overhead wires. Keep the real cloudy weather, same sky and snow-covered mountain silhouette exactly; do not substitute sky, make the mountains bigger, remove cars or add greenery. No objects need removal. Gently lift the dark foreground with very modest contrast, remaining an authentic overcast street photograph.

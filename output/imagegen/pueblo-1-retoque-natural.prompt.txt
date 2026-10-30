@@ -1,0 +1,5 @@
+Tool: built-in image_gen; edit mode.
+Source: imagenes/pueblo 1.jpeg
+Output: imagenes/pueblo-1-retoque-natural.png
+
+Use case: lighting-weather. Apply only a very mild, realistic photographic exposure and white-balance correction to the supplied real photograph. Keep exact framing, perspective, geometry, actual objects and all fine scene details. No scene redesign, additions, invented views, new decor, repainting, smoothing into an illustration, saturation boost or HDR. Output a single natural photograph in the same aspect ratio with no text overlay, watermark or collage. This is the actual town of Andacollo. Preserve the entire cloudy gray sky, exact snowy mountain silhouette and existing amount of snow, same streets, buildings, cars, trees, overhead wires and the monument with its exact original lettering ANDACOLLO. Do not invent sunshine, change weather, remove normal cars, enlarge mountains or replace any building. Remove only the small loose white rubbish bags lying on the distant far-left roadside near the parked cars, reconstructing only the immediate tiny pavement patch. Lift dark street shadows slightly while keeping the overcast mood.

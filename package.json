@@ -8,6 +8,9 @@
   },
   "scripts": {
     "start": "node server.js",
+    "db:migrate": "node database/migrate.js",
+    "admin:create": "node database/create-admin.js",
+    "images:prepare": "node scripts/prepare-gallery.cjs",
     "test": "node --test tests/*.test.cjs"
   },
   "repository": {
@@ -23,7 +26,14 @@
   },
   "homepage": "https://github.com/marcoscofredev/Reservas-Alojamiento#readme",
   "dependencies": {
+    "connect-pg-simple": "^10.0.0",
     "express": "^5.3.0",
+    "express-rate-limit": "^8.7.1",
+    "express-session": "^1.19.0",
+    "helmet": "^8.3.0",
     "pg": "^8.23.1"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.5"
   }
 }

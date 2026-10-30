@@ -23,14 +23,14 @@ function createPostgresStore(pool) {
             `, [checkIn, checkOut]);
             return result.rows[0].available;
         },
-        async create(checkIn, checkOut) {
+        async create(checkIn, checkOut, guest) {
             // La restricción de PostgreSQL resuelve también solicitudes simultáneas.
             const result = await pool.query(`
-                INSERT INTO reservations (check_in, check_out, status)
-                VALUES ($1::date, $2::date, 'demo')
+                INSERT INTO reservations (check_in, check_out, status, guest_name, guest_email, guest_phone)
+                VALUES ($1::date, $2::date, 'demo', $3, $4, $5)
                 RETURNING id, to_char(check_in, 'YYYY-MM-DD') AS "checkIn",
                           to_char(check_out, 'YYYY-MM-DD') AS "checkOut", status
-            `, [checkIn, checkOut]);
+            `, [checkIn, checkOut, guest.name, guest.email, guest.phone]);
             return result.rows[0];
         }
     };
@@ -46,14 +46,14 @@ function createMemoryStore(initialReservations = []) {
         async isAvailable(checkIn, checkOut) {
             return !Availability.hasOverlap(checkIn, checkOut, reservations);
         },
-        async create(checkIn, checkOut) {
+        async create(checkIn, checkOut, guest) {
             if (Availability.hasOverlap(checkIn, checkOut, reservations)) {
                 const error = new Error("Conflicto de fechas");
                 error.code = "23P01";
                 throw error;
             }
             const reservation = { id: randomUUID(), checkIn, checkOut, status: "demo" };
-            reservations.push(reservation);
+            reservations.push({ ...reservation, guest });
             return reservation;
         }
     };

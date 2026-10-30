@@ -19,7 +19,8 @@ async function start(t, options = {}) {
     return {
         get: (path) => fetch(base + path),
         post: (body) => fetch(base + "/api/reservas", {
-            method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body)
+            method: "POST", headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ guest: { name: "Huésped de prueba", email: "huesped@example.com", phone: "" }, ...body })
         }),
         rawPost: (body, type) => fetch(base + "/api/reservas", {
             method: "POST", headers: { "Content-Type": type }, body
@@ -103,6 +104,25 @@ test("La web y sus archivos cargan; los archivos privados del proyecto no se pub
     assert.equal((await api.get("/.env")).status, 404);
     assert.equal((await api.get("/database.js")).status, 404);
     assert.equal((await api.get("/reservation-store.js")).status, 404);
+    assert.equal((await api.get("/guest.js")).status, 404);
+});
+
+test("Valida los datos del huésped y no los publica en ninguna respuesta", async t => {
+    const api = await start(t);
+    const dates = { checkIn: "2026-12-10", checkOut: "2026-12-12" };
+    for (const guest of [null, {}, { name: "Ana", email: "mal", phone: "" },
+        { name: "Ana", email: "ana@example.com", phone: "123" }]) {
+        assert.equal((await api.post({ ...dates, guest })).status, 400);
+    }
+    assert.equal((await (await api.get("/api/reservas")).json()).length, 2);
+    const response = await api.post({ ...dates, guest: { name: "Ana Cofré", email: "ana@example.com" } });
+    assert.equal(response.status, 201);
+    const data = await response.json();
+    assert.deepEqual(Object.keys(data.reservation).sort(), ["checkIn", "checkOut", "id", "status"]);
+    const publicList = await (await api.get("/api/reservas")).text();
+    assert.equal(publicList.includes("Ana"), false);
+    assert.equal(publicList.includes("example.com"), false);
+    assert.equal(publicList.includes("guest"), false);
 });
 
 test("Si el almacenamiento falla, la API responde con error y no con fechas libres", async t => {

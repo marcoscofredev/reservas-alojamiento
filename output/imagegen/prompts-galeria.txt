@@ -1,0 +1,126 @@
+bano-retoque-natural.prompt.txt
+Tool: built-in image_gen; edit mode.
+Source: imagenes/baño.jpeg
+Output: imagenes/bano-retoque-natural.png
+
+Use case: lighting-weather. Edit this exact real lodging photograph with ONLY subtle photographic correction. Preserve the original camera view, framing, geometry, room size, surfaces and real wear, fixtures, furniture, object positions and quantities. No restaging, decor, object additions, upgrades, repairs, expanded view, new windows, artificial glossy textures, excessive saturation or HDR. Gently balance exposure and neutral white balance so existing details are readable; keep authentic colors and natural lighting. Where no removal is explicitly named, remove nothing. Output one photograph, same aspect ratio, no text, watermark or collage. Remove ONLY the orange plastic waste bin with its green lid and visible liner on the floor between the toilet and bidet. Reconstruct only the small floor area revealed by that bin. Preserve toilet, bidet with its three taps, real patterned wall tiles, shower curtain edge, window and latch, actual aged wooden window frame and bathroom proportions. Do not renovate, whiten fixtures artificially, change plumbing, retile, repaint or enlarge the room. Keep portrait aspect ratio.
+
+
+cocina-2-retoque-natural.prompt.txt
+Tool: built-in image_gen; edit mode.
+Source: imagenes/cocina 2.jpeg
+Output: imagenes/cocina-2-retoque-natural.png
+
+Use case: precise-object-edit. Edit the supplied REAL photo, retaining the exact camera framing, perspective, actual dimensions and all architecture, furniture, materials, textures, colors and real wear. This is subtle truthful lodging photography, not a redesign. No new objects, plants, decorations, renovations, furniture replacements, extra lighting fixtures, artificial HDR, strong filters or saturation. Only a modest natural photographic finish for readable shadows, neutral white balance and gentle contrast; do not change the apparent size of the room. Keep all features not explicitly listed for removal unchanged. No collage, text, watermark or border. One photograph with the original aspect ratio. No items need removing. Lift underexposure gently so the actual white counter and wall can be read, recover window highlights modestly, keep the original kitchen, oven/stove and metal kettle, drying rack, wall tap, existing circular wall opening, green upper wall and wooden corner windows exactly as photographed. Preserve the same visible trees outside without substituting a view. Do not repair the opening, redesign anything, expand the kitchen or add appliances or decor.
+
+
+cocina-retoque-natural-v2.prompt.txt
+Tool: built-in image_gen; edit mode.
+Source: imagenes/cocina-retoque-natural.png
+Output: imagenes/cocina-retoque-natural-v2.png
+
+Use case: precise-object-edit. In this supplied already retouched kitchen photograph, remove ONLY the small red ingredient packet standing on the upper wooden shelf at far left. Fill the tiny exposed area with the same existing white wall and wood shelf that surround it. Everything else in this image is locked: keep the exact framing, countertop, sink, faucet, stove, kettle, fridge, drying rack, lower shelf contents, window, wall markings, shadows, colors and exposure precisely unchanged. Do NOT add anything, renovate, restage, enhance or further brighten the photograph. No text, watermark, comparison layout or border. Output this same photograph without that one red packet.
+
+
+cocina-retoque-natural.prompt.txt
+Tool: built-in image_gen; edit mode.
+Source: imagenes/cocina.jpeg
+Output: imagenes/cocina-retoque-natural.png
+
+Use case: precise-object-edit. Edit ONLY the supplied real photograph for a truthful lodging gallery. Preserve the exact camera framing, perspective, room/property proportions, materials, wear, fixtures, furniture, existing landscape and sky. NO redesign, new objects, flowers, planters, replacement furniture, new plants, artificial symmetry, renovations or expanded view. Apply only a very restrained natural photo finish: gently readable shadows, neutral white balance, natural contrast, no vivid saturation, no plastic textures or HDR. Keep everything not explicitly listed for removal unchanged. No text, watermark, collage or border. Output one photograph with the original aspect ratio. Remove only the loose green dishwashing-liquid bottle on the countertop, the yellow cleaning cloth draped over the sink-side counter, the little yellow sponge and loose black cap on the far-left countertop. Keep the actual kitchen layout, sink, tap, real cooking stove, metal kettle, towel on oven door, fridge, shelves, drying rack, wall marks and window exactly unchanged. Do not replace appliances or materials, stage new tableware, add decor or make the kitchen larger.
+
+
+comedor-retoque-natural.prompt.txt
+Tool: built-in image_gen; edit mode.
+Source: imagenes/comedor.jpeg
+Output: imagenes/comedor-retoque-natural.png
+
+Use case: precise-object-edit. Edit the supplied REAL photo, retaining the exact camera framing, perspective, actual dimensions and all architecture, furniture, materials, textures, colors and real wear. This is subtle truthful lodging photography, not a redesign. No new objects, plants, decorations, renovations, furniture replacements, extra lighting fixtures, artificial HDR, strong filters or saturation. Only a modest natural photographic finish for readable shadows, neutral white balance and gentle contrast; do not change the apparent size of the room. Keep all features not explicitly listed for removal unchanged. No collage, text, watermark or border. One photograph with the original aspect ratio. Remove only the blue broom and yellow dustpan leaning at the far right edge. Preserve the sunflower-patterned tablecloth exactly, all chairs and their positions, the little existing side table and its vase, clock, wall coat racks, wooden door, white microwave cabinet and microwave, kettle/coffee maker on top and visible kitchen through the doorway. Do not replace the bright tablecloth or add a table setting; preserve the authentic room. Reduce excessive glare on wood very gently without repainting or erasing texture.
+
+
+ducha-retoque-natural.prompt.txt
+Tool: built-in image_gen; edit mode.
+Source: imagenes/ducha.jpeg
+Output: imagenes/ducha-retoque-natural.png
+
+Use case: lighting-weather. Apply only a very mild, realistic photographic exposure and white-balance correction to the supplied real photograph. Keep exact framing, perspective, geometry, actual objects and all fine scene details. No scene redesign, additions, invented views, new decor, repainting, smoothing into an illustration, saturation boost or HDR. Output a single natural photograph in the same aspect ratio with no text overlay, watermark or collage. Preserve the exact original bathroom scene: metal showerhead and angle, curtain rod and all rings, white shower curtain with its existing gray pattern and purple butterfly ornaments, existing wall tile layout and aged ceiling wood. Do not add a glass shower enclosure, replace curtain or tiles, change fittings or show any part of the room not visible in the source. No objects need removing.
+
+
+frente-1-retoque-natural-v2.prompt.txt
+Tool: built-in image_gen; edit mode.
+Source: imagenes/frente-1-retoque-natural.png
+Output: imagenes/frente-1-retoque-natural-v2.png
+
+Use case: precise-object-edit. Edit target: this supplied already-retouched real photograph of El Durazno cabin. Make ONLY the following small removals in this exact photograph: (1) remove the small wooden stool/stand at the left end of the porch beneath the large front window, INCLUDING its cardboard/cloth covering and all items resting on it; (2) remove the blue-gray vase with sticks/twigs at the back of the porch near the front door on the brick wall; (3) remove the blue hose or blue object leaning near that same doorway. Reconstruct only the small revealed patches of existing brick wall and concrete porch using the neighboring real surfaces. KEEP EVERYTHING ELSE UNCHANGED: exact camera framing, perspective and composition, dimensions of cabin, roof, timber boards, windows, curtains, door, brickwork, porch edges, fence posts and rails, existing tree and leaf positions, unmanicured ground and vegetation, sky, cables, lighting, exposure and color grading. Keep the natural photographic look the user has approved; do not further enhance, sharpen, saturate, brighten, landscape, repair, renovate or clean any other area. Do not remove the wooden fence thinking it is the stool. Do not add replacement furniture, flowers, pots, grass, objects or decorations. Do not add back the cat, bucket or bag that have already been removed. No text, watermark, border, collage or before/after layout. Output a single faithful edited photograph with the same aspect ratio.
+
+
+frente-1-retoque-natural.prompt.txt
+Tool: built-in image_gen; edit mode.
+Source: imagenes/frente 1.jpeg
+Output: imagenes/frente-1-retoque-natural.png
+
+Use case: precise-object-edit. Edit target: the supplied original real photograph of El Durazno cabin. Create ONE restrained, faithful photographic retouch of this SAME photo, landscape with the SAME framing and perspective. Primary request: remove only the gray cat on the porch at lower left; remove the white plastic bucket on the ground at lower right and the small loose plastic/container rubbish immediately around it and the white plastic bag attached at the brick pillar. Seamlessly reconstruct ONLY the tiny background/ground patches revealed by those removed objects using adjacent existing surfaces. Everything else is an invariant: keep exact cabin geometry, wooden boards and their wear, green metal roof and its existing color, windows, curtains, bricks and unfinished brick pillar, wooden fence and all posts, walkway, uneven natural dirt ground, existing trees and bushes, existing sky, power lines, garden layout, and existing lighting direction. Keep the small wooden structure by the left window; do not treat it as rubbish. Do not add flowers, planters, grass, furniture, landscaping, symmetry, people, animals, structural repairs, paving, or new objects. Do not expand or reimagine any part of the scene. Only very subtle photographic finishing: gently lift dark shadows for legibility, neutral white balance, modest natural contrast and detail, true-to-life colors with no saturation boost. The result must look like the original photograph with a few distractions cleaned out, NOT a redesigned property or polished AI architectural rendering. Preserve the original composition and aspect ratio as closely as possible. No text, watermark, collage, before/after layout or decorative frame.
+
+
+frente-2-retoque-natural.prompt.txt
+Tool: built-in image_gen; edit mode.
+Source: imagenes/frente 2.jpeg
+Output: imagenes/frente-2-retoque-natural.png
+
+Use case: precise-object-edit. Edit ONLY the supplied real photograph for a truthful lodging gallery. Preserve the exact camera framing, perspective, room/property proportions, materials, wear, fixtures, furniture, existing landscape and sky. NO redesign, new objects, flowers, planters, replacement furniture, new plants, artificial symmetry, renovations or expanded view. Apply only a very restrained natural photo finish: gently readable shadows, neutral white balance, natural contrast, no vivid saturation, no plastic textures or HDR. Keep everything not explicitly listed for removal unchanged. No text, watermark, collage or border. Output one photograph with the original aspect ratio. Remove only the small wooden stool with its cardboard/cloth cover at the left end of the porch, the small blue-gray vase with sticks and blue hose by the front door, the white bucket and large loose blue plastic water bottle on the foreground ground, and the white plastic bag near the brick pillar. Reconstruct only the revealed wall/concrete/ground patches. Keep the roof, front porch, existing fence, unfinished brick pillar and all real vegetation exactly as photographed.
+
+
+frente-entrada-retoque-natural.prompt.txt
+Tool: built-in image_gen; edit mode.
+Source: imagenes/frente entrada.jpeg
+Output: imagenes/frente-entrada-retoque-natural.png
+
+Use case: precise-object-edit. Edit ONLY the supplied real photograph for a truthful lodging gallery. Preserve the exact camera framing, perspective, room/property proportions, materials, wear, fixtures, furniture, existing landscape and sky. NO redesign, new objects, flowers, planters, replacement furniture, new plants, artificial symmetry, renovations or expanded view. Apply only a very restrained natural photo finish: gently readable shadows, neutral white balance, natural contrast, no vivid saturation, no plastic textures or HDR. Keep everything not explicitly listed for removal unchanged. No text, watermark, collage or border. Output one photograph with the original aspect ratio. Remove only the small wooden stool/stand and the cloth/cardboard on it at the left end of the porch under the large window, and the blue hose/loose blue object by the front doorway. Reconstruct the revealed wall and concrete patches. Preserve the actual windows, wooden door, porch shape, fence, pillar, power cables, roof and all real plants. Do not brighten or reimagine the scene.
+
+
+habitacion-retoque-natural.prompt.txt
+Tool: built-in image_gen; edit mode.
+Source: imagenes/habitacion.jpeg
+Output: imagenes/habitacion-retoque-natural.png
+
+Use case: lighting-weather. Edit this exact real lodging photograph with ONLY subtle photographic correction. Preserve the original camera view, framing, geometry, room size, surfaces and real wear, fixtures, furniture, object positions and quantities. No restaging, decor, object additions, upgrades, repairs, expanded view, new windows, artificial glossy textures, excessive saturation or HDR. Gently balance exposure and neutral white balance so existing details are readable; keep authentic colors and natural lighting. Where no removal is explicitly named, remove nothing. Output one photograph, same aspect ratio, no text, watermark or collage. Keep the blue metal bunk bed with EXACTLY the visible existing number of beds and rails, original striped bedding, cupboard with its existing open/closed doors and visible shelves, ladder, wooden door, green lower wall and pale floor. Do not add a bed, straighten furniture into a different arrangement, close cupboards, replace blankets or enlarge the room. Only improve the original photo's neutral exposure and very subtle clarity.
+
+
+lavamanos-retoque-natural.prompt.txt
+Tool: built-in image_gen; edit mode.
+Source: imagenes/lavamanos.jpeg
+Output: imagenes/lavamanos-retoque-natural.png
+
+Use case: lighting-weather. Edit this exact real lodging photograph with ONLY subtle photographic correction. Preserve the original camera view, framing, geometry, room size, surfaces and real wear, fixtures, furniture, object positions and quantities. No restaging, decor, object additions, upgrades, repairs, expanded view, new windows, artificial glossy textures, excessive saturation or HDR. Gently balance exposure and neutral white balance so existing details are readable; keep authentic colors and natural lighting. Where no removal is explicitly named, remove nothing. Output one photograph, same aspect ratio, no text, watermark or collage. Keep the actual round cream basin with subtle natural lines, tall metal tap, wooden counter including ALL real patina, worn finish and marks, existing tiles and mirror edge, towel edge at far left, actual soap and diffuser bottles on the side shelf, and wall socket. Do not redesign or replace anything and do not erase the wooden surface's real wear or invent an immaculate countertop. Improve only gentle exposure and neutral color balance.
+
+
+matrimonial-retoque-natural.prompt.txt
+Tool: built-in image_gen; edit mode.
+Source: imagenes/matrimonial.jpeg
+Output: imagenes/matrimonial-retoque-natural.png
+
+Use case: precise-object-edit. Edit the supplied REAL photo, retaining the exact camera framing, perspective, actual dimensions and all architecture, furniture, materials, textures, colors and real wear. This is subtle truthful lodging photography, not a redesign. No new objects, plants, decorations, renovations, furniture replacements, extra lighting fixtures, artificial HDR, strong filters or saturation. Only a modest natural photographic finish for readable shadows, neutral white balance and gentle contrast; do not change the apparent size of the room. Keep all features not explicitly listed for removal unchanged. No collage, text, watermark or border. One photograph with the original aspect ratio. There is no rubbish requiring removal: do not remove any objects. Gently correct the greenish cast of the folded white towels and lift the dark bedroom slightly, keeping the real terracotta/salmon bedspread, orange cushion with floral outlines, red blanket, both towel stacks, bedside table, actual lamp, burgundy curtain, teal-green painted wall with its existing marks and black wall heater identical. Do not add pillows, plants, decorations, views or windows or erase real marks. Make this original room more clearly photographed, not upgraded.
+
+
+pueblo-1-retoque-natural.prompt.txt
+Tool: built-in image_gen; edit mode.
+Source: imagenes/pueblo 1.jpeg
+Output: imagenes/pueblo-1-retoque-natural.png
+
+Use case: lighting-weather. Apply only a very mild, realistic photographic exposure and white-balance correction to the supplied real photograph. Keep exact framing, perspective, geometry, actual objects and all fine scene details. No scene redesign, additions, invented views, new decor, repainting, smoothing into an illustration, saturation boost or HDR. Output a single natural photograph in the same aspect ratio with no text overlay, watermark or collage. This is the actual town of Andacollo. Preserve the entire cloudy gray sky, exact snowy mountain silhouette and existing amount of snow, same streets, buildings, cars, trees, overhead wires and the monument with its exact original lettering ANDACOLLO. Do not invent sunshine, change weather, remove normal cars, enlarge mountains or replace any building. Remove only the small loose white rubbish bags lying on the distant far-left roadside near the parked cars, reconstructing only the immediate tiny pavement patch. Lift dark street shadows slightly while keeping the overcast mood.
+
+
+pueblo-2-retoque-natural.prompt.txt
+Tool: built-in image_gen; edit mode.
+Source: imagenes/pueblo 2.jpeg
+Output: imagenes/pueblo-2-retoque-natural.png
+
+Use case: lighting-weather. Apply only a very mild, realistic photographic exposure and white-balance correction to the supplied real photograph. Keep exact framing, perspective, geometry, actual objects and all fine scene details. No scene redesign, additions, invented views, new decor, repainting, smoothing into an illustration, saturation boost or HDR. Output a single natural photograph in the same aspect ratio with no text overlay, watermark or collage. Keep this exact Andacollo monument, all original letters ANDACOLLO exactly spelled and shaped, central sculpture, ramps, steps, stone cladding, puddles, same parked cars, buildings, trees, poles and overhead wires. Keep the real cloudy weather, same sky and snow-covered mountain silhouette exactly; do not substitute sky, make the mountains bigger, remove cars or add greenery. No objects need removal. Gently lift the dark foreground with very modest contrast, remaining an authentic overcast street photograph.
+
+
+sala-de-estar-retoque-natural.prompt.txt
+Tool: built-in image_gen; edit mode.
+Source: imagenes/sala de estar.jpeg
+Output: imagenes/sala-de-estar-retoque-natural.png
+
+Use case: lighting-weather. Edit this exact real lodging photograph with ONLY subtle photographic correction. Preserve the original camera view, framing, geometry, room size, surfaces and real wear, fixtures, furniture, object positions and quantities. No restaging, decor, object additions, upgrades, repairs, expanded view, new windows, artificial glossy textures, excessive saturation or HDR. Gently balance exposure and neutral white balance so existing details are readable; keep authentic colors and natural lighting. Where no removal is explicitly named, remove nothing. Output one photograph, same aspect ratio, no text, watermark or collage. Keep the actual blue-and-black striped sofa cover, cushions, all curtains and windows, actual green potted plant, existing speaker and fireplace, small mantel items, wooden walls and ceiling. IMPORTANT: keep the red fire extinguisher and its safety sign at the far left, with the same position and appearance. Do not remove or hide safety equipment. Improve shadow readability modestly and reduce window glare without inventing a view or changing the real scene.

@@ -31,7 +31,17 @@ class Element {
 }
 async function loadCalendar(options = {}) {
     const elements = Object.fromEntries(["resultado-disponibilidad",
-        "calendario", "mes-calendario", "dias-calendario", "ayuda-calendario", "mes-anterior", "mes-siguiente", "limpiar-fechas", "form-contacto", "reserva-acciones", "crear-reserva-prueba", "resultado-reserva"].map(id => [id, new Element()]));
+        "calendario", "mes-calendario", "dias-calendario", "ayuda-calendario", "mes-anterior", "mes-siguiente", "limpiar-fechas", "form-reserva", "campos-reserva", "reserva-nombre", "reserva-correo", "reserva-telefono", "reserva-acciones", "guardar-reserva", "resultado-reserva"].map(id => [id, new Element()]));
+    elements["reserva-nombre"].value = "Huésped de prueba";
+    elements["reserva-correo"].value = "huesped@example.com";
+    elements["reserva-telefono"].value = "+54 2942 123456";
+    elements["form-reserva"].reportValidity = () => !options.invalidGuest;
+    elements["form-reserva"].reset = () => {
+        for (const id of ["reserva-nombre", "reserva-correo", "reserva-telefono"]) elements[id].value = "";
+    };
+    elements["guardar-reserva"].click = () => {
+        if (!elements["guardar-reserva"].disabled) return elements["form-reserva"].handlers.submit({ preventDefault() {} });
+    };
     elements["reserva-acciones"].hidden = true;
     class FixedDate extends Date {
         constructor(...args) { super(...(args.length ? args : [2026, 9, 27, 12])); }
@@ -49,7 +59,7 @@ async function loadCalendar(options = {}) {
         Date: FixedDate, Intl, URLSearchParams,
         console: { error() {} },
         fetch: async (url, config = {}) => {
-            requests.push({ url, method: config.method || "GET" });
+            requests.push({ url, method: config.method || "GET", body: config.body });
             if (options.networkFetch) return options.networkFetch(url, config);
             if (url.startsWith("/api/disponibilidad?")) {
                 if (options.deferredConsultations) await new Promise(resolve => pendingConsultations.push(resolve));
@@ -64,6 +74,7 @@ async function loadCalendar(options = {}) {
             if (config.method === "POST") {
                 if (options.deferredPost) await new Promise(resolve => { resolvePost = resolve; });
                 if (options.postFailure) throw new Error("Conexión interrumpida");
+                if (options.guestRejected) return { ok: false, status: 400, json: async () => ({ error: "Revisá el teléfono." }) };
                 const dates = JSON.parse(config.body);
                 const conflict = options.postConflict || rules.hasOverlap(dates.checkIn, dates.checkOut, storedReservations);
                 if (conflict) {
@@ -224,7 +235,7 @@ test("La selección crea una reserva simulada, refresca las noches y limpia la s
     day("2026-11-15").click();
     day("2026-11-18").click();
     await settle();
-    await elements["crear-reserva-prueba"].click();
+    await elements["guardar-reserva"].click();
     assert.equal(elements["resultado-reserva"].dataset.state, "success");
     assert.match(elements["resultado-reserva"].textContent, /Reserva guardada/);
     assert.equal(day("2026-11-15").disabled, true);
@@ -239,10 +250,10 @@ test("Un doble clic envía una sola solicitud y desactiva el calendario durante 
     day("2026-11-15").click();
     day("2026-11-18").click();
     await settle();
-    const pending = elements["crear-reserva-prueba"].click();
-    elements["crear-reserva-prueba"].click();
+    const pending = elements["guardar-reserva"].click();
+    elements["guardar-reserva"].click();
     assert.equal(elements.calendario.inert, true);
-    assert.equal(elements["crear-reserva-prueba"].disabled, true);
+    assert.equal(elements["guardar-reserva"].disabled, true);
     assert.equal(requests.filter(request => request.method === "POST").length, 1);
     finishPost();
     await pending;
@@ -254,7 +265,7 @@ test("Si las noches se ocuparon después de consultar, informa el conflicto y ac
     day("2026-11-15").click();
     day("2026-11-18").click();
     await settle();
-    await elements["crear-reserva-prueba"].click();
+    await elements["guardar-reserva"].click();
     assert.equal(elements["resultado-reserva"].dataset.state, "error");
     assert.match(elements["resultado-reserva"].textContent, /se ocuparon/);
     assert.equal(day("2026-11-15").disabled, true);
@@ -278,7 +289,7 @@ test("Un fallo al enviar no muestra una confirmación falsa ni deja el calendari
     day("2026-11-15").click();
     day("2026-11-18").click();
     await settle();
-    await elements["crear-reserva-prueba"].click();
+    await elements["guardar-reserva"].click();
     assert.equal(elements["resultado-reserva"].dataset.state, "error");
     assert.equal(elements["reserva-acciones"].hidden, true);
     assert.equal(elements.calendario.inert, false);
@@ -316,11 +327,41 @@ test("Si la reserva se creó pero falla la actualización, comunica ambos result
     day("2026-11-15").click();
     day("2026-11-18").click();
     await settle();
-    await elements["crear-reserva-prueba"].click();
+    await elements["guardar-reserva"].click();
     assert.equal(elements["resultado-reserva"].dataset.state, "success");
     assert.match(elements["resultado-reserva"].textContent, /quedó guardada, pero/);
     assert.equal(elements.calendario.hidden, true);
     assert.equal(elements["reserva-acciones"].hidden, true);
+});
+
+test("Envía los datos del huésped solo al guardar y limpia los campos al confirmar", async () => {
+    const { elements, day, settle, requests } = await loadCalendar();
+    elements["mes-siguiente"].click();
+    day("2026-11-15").click();
+    day("2026-11-18").click();
+    await settle();
+    assert.equal(requests.filter(request => request.method === "GET").some(request => request.url.includes("example.com")), false);
+    await elements["guardar-reserva"].click();
+    const sent = JSON.parse(requests.find(request => request.method === "POST").body);
+    assert.deepEqual(sent.guest, { name: "Huésped de prueba", email: "huesped@example.com", phone: "+54 2942 123456" });
+    assert.equal(elements["reserva-nombre"].value, "");
+    assert.equal(elements["reserva-correo"].value, "");
+});
+
+test("Los campos inválidos no envían y un rechazo del servidor conserva lo escrito", async () => {
+    for (const options of [{ invalidGuest: true }, { guestRejected: true }]) {
+        const { elements, day, settle, requests } = await loadCalendar(options);
+        elements["mes-siguiente"].click();
+        day("2026-11-15").click();
+        day("2026-11-18").click();
+        await settle();
+        await elements["guardar-reserva"].click();
+        assert.equal(requests.filter(request => request.method === "POST").length, options.invalidGuest ? 0 : 1);
+        assert.equal(elements["reserva-nombre"].value, "Huésped de prueba");
+        assert.equal(elements["reserva-acciones"].hidden, false);
+        assert.equal(Boolean(elements["campos-reserva"].disabled), false);
+        if (options.guestRejected) assert.match(elements["resultado-reserva"].textContent, /teléfono/);
+    }
 });
 
 test("El recorrido del calendario consulta y crea a través de un servidor HTTP real de prueba", async t => {
@@ -348,7 +389,7 @@ test("El recorrido del calendario consulta y crea a través de un servidor HTTP 
     day("2026-11-15").click();
     day("2026-11-18").click();
     await waitFor(() => elements["reserva-acciones"].hidden === false);
-    await elements["crear-reserva-prueba"].click();
+    await elements["guardar-reserva"].click();
     assert.match(elements["resultado-reserva"].textContent, /Reserva guardada/);
     assert.equal(day("2026-11-15").disabled, true);
     const stored = await (await fetch(base + "/api/reservas")).json();

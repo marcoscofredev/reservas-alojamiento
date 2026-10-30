@@ -1,0 +1,5 @@
+Tool: built-in image_gen; edit mode.
+Source: imagenes/cocina-retoque-natural.png
+Output: imagenes/cocina-retoque-natural-v2.png
+
+Use case: precise-object-edit. In this supplied already retouched kitchen photograph, remove ONLY the small red ingredient packet standing on the upper wooden shelf at far left. Fill the tiny exposed area with the same existing white wall and wood shelf that surround it. Everything else in this image is locked: keep the exact framing, countertop, sink, faucet, stove, kettle, fridge, drying rack, lower shelf contents, window, wall markings, shadows, colors and exposure precisely unchanged. Do NOT add anything, renovate, restage, enhance or further brighten the photograph. No text, watermark, comparison layout or border. Output this same photograph without that one red packet.

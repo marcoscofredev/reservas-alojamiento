@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="availability.js" defer></script>
     <script src="script.js" defer></script>
+    <script src="gallery.js" defer></script>
 </head>
 <body>
     <a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -29,7 +30,7 @@
             <h1>Bienvenidos</h1>
             <p>Una cabaña luminosa, atención familiar y el norte neuquino por descubrir. Tu lugar para volver y descansar en Andacollo.</p>
             <a href="#alojamiento">Ver alojamiento</a>
-            <img src="imagenes/frente 1.jpeg" alt="Vista del frente de la cabaña El Durazno">
+            <img src="imagenes/galeria/frente-1.jpg" width="1672" height="941" fetchpriority="high" alt="Vista del frente de la cabaña El Durazno">
         </section>
         <section id="disponibilidad" class="section-layout" aria-labelledby="titulo-disponibilidad">
             <div class="section-copy">
@@ -67,8 +68,21 @@
                 </div>
                 <p id="resultado-disponibilidad" class="booking-result" role="status" aria-live="polite" aria-atomic="true"></p>
                 <div id="reserva-acciones" class="reservation-actions" hidden>
-                    <button type="button" id="crear-reserva-prueba">Guardar reserva</button>
-                    <p class="small-note">Las fechas quedarán guardadas y se marcarán como ocupadas.</p>
+                    <form id="form-reserva" aria-labelledby="titulo-datos-huesped" aria-describedby="nota-datos-huesped">
+                        <h3 id="titulo-datos-huesped">Datos de quien reserva</h3>
+                        <p class="small-note" id="nota-datos-huesped">El nombre y el correo son obligatorios. Tus datos no se muestran en el calendario público. Por ahora, usá datos ficticios para practicar.</p>
+                        <fieldset id="campos-reserva">
+                            <legend class="visually-hidden">Datos de contacto de la reserva</legend>
+                            <label for="reserva-nombre">Nombre y apellido</label>
+                            <input type="text" id="reserva-nombre" name="name" autocomplete="name" minlength="2" maxlength="120" required>
+                            <label for="reserva-correo">Correo electrónico</label>
+                            <input type="email" id="reserva-correo" name="email" autocomplete="email" maxlength="254" required>
+                            <label for="reserva-telefono">Teléfono (opcional)</label>
+                            <input type="tel" id="reserva-telefono" name="phone" autocomplete="tel" maxlength="30">
+                            <button type="submit" id="guardar-reserva">Guardar reserva</button>
+                        </fieldset>
+                        <p class="small-note">Las fechas quedarán guardadas y se marcarán como ocupadas. No se envían correos automáticos.</p>
+                    </form>
                 </div>
                 <p id="resultado-reserva" class="booking-result" role="status" aria-live="polite" aria-atomic="true"></p>
                 <noscript>Para consultar fechas, activá JavaScript en tu navegador. El calendario es una demostración.</noscript>
@@ -77,29 +91,125 @@
         <section id="galeria" class="section-layout">
             <div class="section-copy">
                 <p class="eyebrow">Una mirada al lugar</p>
-                <h2>Galería</h2>
-                <p>Conocé El Durazno antes de tu llegada.</p>
+                <h2 id="titulo-galeria">Galería</h2>
+                <p>Recorré los ambientes de El Durazno y conocé un poco de Andacollo antes de tu llegada.</p>
+                <p class="small-note">Tocá una foto para verla completa. Podés avanzar a tu ritmo, sin cambios automáticos.</p>
             </div>
-            <img src="imagenes/frente 1.jpeg" alt="Frente de la cabaña El Durazno" loading="lazy">
+            <div class="gallery-content">
+                <div class="gallery-grid">
+                    <figure class="gallery-tile">
+                        <a href="imagenes/galeria/frente-1.jpg" data-gallery data-caption="Frente de la cabaña" aria-label="Ampliar foto: Frente de la cabaña">
+                            <img src="imagenes/galeria/frente-1-thumb.jpg" srcset="imagenes/galeria/frente-1-thumb.jpg 640w, imagenes/galeria/frente-1.jpg 1672w" sizes="(max-width: 760px) calc((100vw - 64px) / 2), 300px" width="640" height="360" alt="Vista del frente de la cabaña El Durazno, con techo verde y cerco de madera." loading="lazy" decoding="async">
+                        </a>
+                        <figcaption>Frente de la cabaña</figcaption>
+                    </figure>
+                    <figure class="gallery-tile">
+                        <a href="imagenes/galeria/matrimonial.jpg" data-gallery data-caption="Dormitorio matrimonial" aria-label="Ampliar foto: Dormitorio matrimonial">
+                            <img src="imagenes/galeria/matrimonial-thumb.jpg" srcset="imagenes/galeria/matrimonial-thumb.jpg 640w, imagenes/galeria/matrimonial.jpg 1672w" sizes="(max-width: 760px) calc((100vw - 64px) / 2), 300px" width="640" height="360" alt="Cama matrimonial con ropa de cama y toallas, mesa de luz y calefactor." loading="lazy" decoding="async">
+                        </a>
+                        <figcaption>Dormitorio matrimonial</figcaption>
+                    </figure>
+                    <figure class="gallery-tile">
+                        <a href="imagenes/galeria/cocina.jpg" data-gallery data-caption="Cocina equipada" aria-label="Ampliar foto: Cocina equipada">
+                            <img src="imagenes/galeria/cocina-thumb.jpg" srcset="imagenes/galeria/cocina-thumb.jpg 640w, imagenes/galeria/cocina.jpg 1672w" sizes="(max-width: 760px) calc((100vw - 64px) / 2), 300px" width="640" height="360" alt="Cocina con pileta, cocina a gas, pava y heladera." loading="lazy" decoding="async">
+                        </a>
+                        <figcaption>Cocina equipada</figcaption>
+                    </figure>
+                    <figure class="gallery-tile">
+                        <a href="imagenes/galeria/sala-de-estar.jpg" data-gallery data-caption="Sala de estar" aria-label="Ampliar foto: Sala de estar">
+                            <img src="imagenes/galeria/sala-de-estar-thumb.jpg" srcset="imagenes/galeria/sala-de-estar-thumb.jpg 640w, imagenes/galeria/sala-de-estar.jpg 1672w" sizes="(max-width: 760px) calc((100vw - 64px) / 2), 300px" width="640" height="360" alt="Sillón azul en la sala de estar de madera, junto a las ventanas y el hogar." loading="lazy" decoding="async">
+                        </a>
+                        <figcaption>Sala de estar</figcaption>
+                    </figure>
+                    <figure class="gallery-tile">
+                        <a href="imagenes/galeria/habitacion.jpg" data-gallery data-caption="Segundo dormitorio" aria-label="Ampliar foto: Segundo dormitorio">
+                            <img src="imagenes/galeria/habitacion-thumb.jpg" srcset="imagenes/galeria/habitacion-thumb.jpg 640w, imagenes/galeria/habitacion.jpg 1672w" sizes="(max-width: 760px) calc((100vw - 64px) / 2), 300px" width="640" height="360" alt="Cucheta azul y placard de madera en el segundo dormitorio." loading="lazy" decoding="async">
+                        </a>
+                        <figcaption>Segundo dormitorio</figcaption>
+                    </figure>
+                    <figure class="gallery-tile">
+                        <a href="imagenes/galeria/comedor.jpg" data-gallery data-caption="Comedor" aria-label="Ampliar foto: Comedor">
+                            <img src="imagenes/galeria/comedor-thumb.jpg" srcset="imagenes/galeria/comedor-thumb.jpg 640w, imagenes/galeria/comedor.jpg 1672w" sizes="(max-width: 760px) calc((100vw - 64px) / 2), 300px" width="640" height="360" alt="Mesa con mantel de girasoles y sillas en el comedor de la cabaña." loading="lazy" decoding="async">
+                        </a>
+                        <figcaption>Comedor</figcaption>
+                    </figure>
+                </div>
+                <details class="gallery-more">
+                    <summary>Ver las 14 fotos</summary>
+                    <div class="gallery-grid">
+                    <figure class="gallery-tile">
+                        <a href="imagenes/galeria/frente-2.jpg" data-gallery data-caption="Otra vista del frente" aria-label="Ampliar foto: Otra vista del frente">
+                            <img src="imagenes/galeria/frente-2-thumb.jpg" srcset="imagenes/galeria/frente-2-thumb.jpg 640w, imagenes/galeria/frente-2.jpg 1672w" sizes="(max-width: 760px) calc((100vw - 64px) / 2), 300px" width="640" height="360" alt="Vista lateral del frente de la cabaña detrás del cerco de madera." loading="lazy" decoding="async">
+                        </a>
+                        <figcaption>Otra vista del frente</figcaption>
+                    </figure>
+                    <figure class="gallery-tile">
+                        <a href="imagenes/galeria/frente-entrada.jpg" data-gallery data-caption="Entrada de la cabaña" aria-label="Ampliar foto: Entrada de la cabaña">
+                            <img src="imagenes/galeria/frente-entrada-thumb.jpg" srcset="imagenes/galeria/frente-entrada-thumb.jpg 640w, imagenes/galeria/frente-entrada.jpg 1672w" sizes="(max-width: 760px) calc((100vw - 64px) / 2), 300px" width="640" height="360" alt="Puerta de entrada y galería exterior de la cabaña El Durazno." loading="lazy" decoding="async">
+                        </a>
+                        <figcaption>Entrada de la cabaña</figcaption>
+                    </figure>
+                    <figure class="gallery-tile">
+                        <a href="imagenes/galeria/cocina-2.jpg" data-gallery data-caption="Luz natural en la cocina" aria-label="Ampliar foto: Luz natural en la cocina">
+                            <img src="imagenes/galeria/cocina-2-thumb.jpg" srcset="imagenes/galeria/cocina-2-thumb.jpg 640w, imagenes/galeria/cocina-2.jpg 1672w" sizes="(max-width: 760px) calc((100vw - 64px) / 2), 300px" width="640" height="360" alt="Mesada, cocina a gas y ventanas de madera con vista a los árboles." loading="lazy" decoding="async">
+                        </a>
+                        <figcaption>Luz natural en la cocina</figcaption>
+                    </figure>
+                    <figure class="gallery-tile">
+                        <a href="imagenes/galeria/bano.jpg" data-gallery data-caption="Baño" aria-label="Ampliar foto: Baño">
+                            <img src="imagenes/galeria/bano-thumb.jpg" srcset="imagenes/galeria/bano-thumb.jpg 640w, imagenes/galeria/bano.jpg 941w" sizes="(max-width: 760px) calc((100vw - 64px) / 2), 300px" width="640" height="1137" alt="Inodoro y bidet en el baño, con revestimiento claro y ventana pequeña." loading="lazy" decoding="async">
+                        </a>
+                        <figcaption>Baño</figcaption>
+                    </figure>
+                    <figure class="gallery-tile">
+                        <a href="imagenes/galeria/ducha.jpg" data-gallery data-caption="Ducha" aria-label="Ampliar foto: Ducha">
+                            <img src="imagenes/galeria/ducha-thumb.jpg" srcset="imagenes/galeria/ducha-thumb.jpg 640w, imagenes/galeria/ducha.jpg 1672w" sizes="(max-width: 760px) calc((100vw - 64px) / 2), 300px" width="640" height="360" alt="Ducha del baño con cortina blanca y detalles de mariposas." loading="lazy" decoding="async">
+                        </a>
+                        <figcaption>Ducha</figcaption>
+                    </figure>
+                    <figure class="gallery-tile">
+                        <a href="imagenes/galeria/lavamanos.jpg" data-gallery data-caption="Lavamanos" aria-label="Ampliar foto: Lavamanos">
+                            <img src="imagenes/galeria/lavamanos-thumb.jpg" srcset="imagenes/galeria/lavamanos-thumb.jpg 640w, imagenes/galeria/lavamanos.jpg 1672w" sizes="(max-width: 760px) calc((100vw - 64px) / 2), 300px" width="640" height="360" alt="Lavamanos de cerámica sobre mesada de madera, con grifería alta." loading="lazy" decoding="async">
+                        </a>
+                        <figcaption>Lavamanos</figcaption>
+                    </figure>
+                    <figure class="gallery-tile">
+                        <a href="imagenes/galeria/pueblo-1.jpg" data-gallery data-caption="Andacollo y sus montañas" aria-label="Ampliar foto: Andacollo y sus montañas">
+                            <img src="imagenes/galeria/pueblo-1-thumb.jpg" srcset="imagenes/galeria/pueblo-1-thumb.jpg 640w, imagenes/galeria/pueblo-1.jpg 1672w" sizes="(max-width: 760px) calc((100vw - 64px) / 2), 300px" width="640" height="360" alt="Vista de las calles de Andacollo con montañas nevadas al fondo." loading="lazy" decoding="async">
+                        </a>
+                        <figcaption>Andacollo y sus montañas</figcaption>
+                    </figure>
+                    <figure class="gallery-tile">
+                        <a href="imagenes/galeria/pueblo-2.jpg" data-gallery data-caption="Conocé Andacollo" aria-label="Ampliar foto: Conocé Andacollo">
+                            <img src="imagenes/galeria/pueblo-2-thumb.jpg" srcset="imagenes/galeria/pueblo-2-thumb.jpg 640w, imagenes/galeria/pueblo-2.jpg 1672w" sizes="(max-width: 760px) calc((100vw - 64px) / 2), 300px" width="640" height="360" alt="Monumento con las letras Andacollo y las montañas al fondo." loading="lazy" decoding="async">
+                        </a>
+                        <figcaption>Conocé Andacollo</figcaption>
+                    </figure>
+                    </div>
+                </details>
+            </div>
         </section>
         <section id="contacto" class="section-layout">
             <div class="section-copy">
                 <p class="eyebrow">Estamos para ayudarte</p>
                 <h2>Contacto</h2>
-                <p>Contanos qué tenés en mente para tu estadía.</p>
-                <p class="small-note" id="nota-contacto">El envío de consultas todavía no está habilitado.</p>
+                <p>Comunicate directamente con nosotros para consultar sobre el alojamiento y organizar tu visita.</p>
             </div>
-            <form class="contact-form" id="form-contacto" aria-describedby="nota-contacto">
-                <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" name="nombre" autocomplete="name" required>
-                <label for="correo">Correo</label>
-                <input type="email" id="correo" name="email" autocomplete="email" required>
-                <label for="telefono">Teléfono</label>
-                <input type="tel" id="telefono" name="tel" autocomplete="tel">
-                <label for="mensaje">Mensaje</label>
-                <textarea id="mensaje" name="mensaje" required></textarea>
-                <button type="submit" disabled>Envío próximamente</button>
-            </form>
+            <address class="contact-details">
+                <div class="contact-item">
+                    <h3>Teléfono</h3>
+                    <p>Francisco Cofré</p>
+                    <a href="tel:+542942547843">+54 2942 54 78 43</a>
+                </div>
+                <div class="contact-item">
+                    <h3>Instagram</h3>
+                    <a href="https://www.instagram.com/elduraznoalojamiento/">@elduraznoalojamiento</a>
+                </div>
+                <div class="contact-item">
+                    <h3>Correo electrónico</h3>
+                    <a href="mailto:duraznoalojamiento@gmail.com">duraznoalojamiento@gmail.com</a>
+                </div>
+            </address>
         </section>
         <section id="alojamiento" class="section-layout">
             <div class="alojamiento-texto">
@@ -122,7 +232,6 @@
                 src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d397.3224542719731!2d-70.6694046!3d-37.1864598!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x966de5a447266231%3A0x2def07f9f90d883f!2sAlojamiento%20el%20Durazno!5e0!3m2!1ses-419!2sar!4v1792597183284!5m2!1ses-419!2sar"
                 width="600"
                 height="450"
-                style="border:0;"
                 allowfullscreen
                 loading="lazy"
                 referrerpolicy="strict-origin-when-cross-origin">
@@ -159,6 +268,22 @@
             </div>
         </section>
     </main>
+    <dialog id="gallery-dialog" class="gallery-dialog" aria-labelledby="gallery-title">
+        <div class="gallery-dialog-top">
+            <h2 id="gallery-title">Fotos de El Durazno</h2>
+            <button type="button" id="gallery-close" autofocus>Cerrar <span aria-hidden="true">×</span></button>
+        </div>
+        <figure>
+            <img id="gallery-image" alt="" decoding="async">
+            <figcaption id="gallery-caption"></figcaption>
+        </figure>
+        <div class="gallery-controls">
+            <button type="button" id="gallery-previous" aria-label="Foto anterior">← Anterior</button>
+            <p id="gallery-counter" role="status" aria-live="polite"></p>
+            <button type="button" id="gallery-next" aria-label="Foto siguiente">Siguiente →</button>
+        </div>
+        <p id="gallery-error" class="small-note" role="status"></p>
+    </dialog>
     <footer>
         <p>El Durazno · Alojamiento familiar en Andacollo, Neuquén</p>
     </footer>

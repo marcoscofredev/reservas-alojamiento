@@ -1,8 +1,13 @@
 const selection = { checkIn: "", checkOut: "" };
 const resultado = document.getElementById("resultado-disponibilidad");
 const reservationActions = document.getElementById("reserva-acciones");
-const reserveButton = document.getElementById("crear-reserva-prueba");
+const reserveButton = document.getElementById("guardar-reserva");
 const reservationResult = document.getElementById("resultado-reserva");
+const reservationForm = document.getElementById("form-reserva");
+const guestFields = document.getElementById("campos-reserva");
+const guestName = document.getElementById("reserva-nombre");
+const guestEmail = document.getElementById("reserva-correo");
+const guestPhone = document.getElementById("reserva-telefono");
 let verifiedSelection = null;
 let reservationInFlight = false;
 let reservations = [];
@@ -16,6 +21,7 @@ const nextMonth = document.getElementById("mes-siguiente");
 let visibleMonth = limits.min.slice(0, 7);
 const monthFormatter = new Intl.DateTimeFormat("es-AR", { month: "long", year: "numeric", timeZone: "UTC" });
 const dateFormatter = new Intl.DateTimeFormat("es-AR", { weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+const shortDateFormatter = new Intl.DateTimeFormat("es-AR", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
 
 function applyLimits() {
     // Actualiza los límites si la página queda abierta de un día a otro.
@@ -190,13 +196,7 @@ async function updateResult() {
             return;
         }
 
-        const format = value =>
-            new Intl.DateTimeFormat("es-AR", {
-                day: "numeric",
-                month: "short",
-                year: "numeric",
-                timeZone: "UTC"
-            }).format(new Date(`${value}T00:00:00Z`));
+        const format = value => shortDateFormatter.format(new Date(`${value}T00:00:00Z`));
 
         showResult(
             `Entrada: ${format(checkIn)}. Salida: ${format(checkOut)}. ` +
@@ -221,14 +221,23 @@ async function updateResult() {
     }
 }
 
-reserveButton.addEventListener("click", async function () {
+reservationForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
     if (reservationInFlight || !verifiedSelection ||
         selection.checkIn !== verifiedSelection.checkIn || selection.checkOut !== verifiedSelection.checkOut) return;
 
-    const requested = { ...verifiedSelection };
+    guestName.value = guestName.value.trim();
+    guestEmail.value = guestEmail.value.trim();
+    guestPhone.value = guestPhone.value.trim();
+    if (!reservationForm.reportValidity()) return;
+    const requested = {
+        ...verifiedSelection,
+        guest: { name: guestName.value, email: guestEmail.value, phone: guestPhone.value }
+    };
     let created = false;
     reservationInFlight = true;
     reserveButton.disabled = true;
+    guestFields.disabled = true;
     reserveButton.setAttribute("aria-busy", "true");
     calendar.inert = true;
     reservationResult.dataset.state = "";
@@ -241,6 +250,11 @@ reserveButton.addEventListener("click", async function () {
             body: JSON.stringify(requested)
         });
         const data = await response.json();
+        if (response.status === 400) {
+            reservationResult.dataset.state = "error";
+            reservationResult.textContent = typeof data.error === "string" ? data.error : "Revisá los datos ingresados.";
+            return;
+        }
         verifiedSelection = null;
         reservationActions.hidden = true;
 
@@ -259,6 +273,7 @@ reserveButton.addEventListener("click", async function () {
         }
 
         created = true;
+        reservationForm.reset();
         const format = value => dateFormatter.format(new Date(`${value}T00:00:00Z`));
         reservationResult.dataset.state = "success";
         reservationResult.textContent = `Reserva guardada del ${format(requested.checkIn)} al ${format(requested.checkOut)}. Las noches seleccionadas quedaron apartadas.`;
@@ -277,10 +292,10 @@ reserveButton.addEventListener("click", async function () {
         calendar.inert = false;
         reservationInFlight = false;
         reserveButton.disabled = false;
+        guestFields.disabled = false;
         reserveButton.setAttribute("aria-busy", "false");
     }
 });
-document.getElementById("form-contacto").addEventListener("submit", event => event.preventDefault());
 window.addEventListener("pageshow", () => {
     if (!calendar.hidden) {
         renderCalendar();
